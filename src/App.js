@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import 'antd/dist/antd.css';
 import {
   BrowserRouter as Router,
   Routes,
@@ -31,6 +32,9 @@ import AboutUs from './pages/ExtraInfo/AboutUs'
 import PrivacyPolicy from './pages/ExtraInfo/PrivacyPolicy'
 import TermsAndConditions from './pages/ExtraInfo/TermsAndConditions'
 import Contests from './pages/Contests'
+import { Layout, Menu } from 'antd';
+
+const { Header, Footer, Content } = Layout;
 
 //react context
 export const CredentialsContext = React.createContext()
@@ -112,73 +116,87 @@ const App = () => {
   return (
     <>
         <CredentialsContext.Provider value={{ creds, setCreds }}>
-          <Router>
-            <Routes>
-              <Route path="/list/:id" element={<PlaylistsMatch/>} /> {' '}
-              {/* All Playlists - id is username */}
+          <Layout>
+            <Header>
+            <div className="logo" />
+            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+              {new Array(7).fill(null).map((_, index) => {
+                const key = index + 1;
+                return <Menu.Item key={key}>{`nav ${key}`}</Menu.Item>;
+              })}
+            </Menu>
+            </Header>
+            <Content>
+              <Router>
+                <Routes>
+                  <Route path="/list/:id" element={<PlaylistsMatch/>} /> {' '}
+                  {/* All Playlists - id is username */}
 
-              <Route path="/list/:id/:slug" element={<PlaylistList1/>}/> {' '}
-              {/* Questions in a Particular playlist - slug is of that problem-list */}
-              
-              <Route  path="/login" element={<Login/>} />{' '}
-              <Route  path="/register" element={<Register/>} />{' '}
-              {/* Login/Registration */}
-              
-              <Route path="/upsolve/codeforces" element={<CodeforcesUp/>}/> {' '}
-              {/* Codeforces upsolve */}
-              
-              <Route  path="/upsolve/atcoder" element={<AtcoderUp/>} /> {' '}
-              {/* Atcoder Upsolve */}
-              
-              <Route  path="/upsolve/codechef" element={<CodechefUp/>} /> {' '}
-              {/* Codechef upsolve */}
+                  <Route path="/list/:id/:slug" element={<PlaylistList1/>}/> {' '}
+                  {/* Questions in a Particular playlist - slug is of that problem-list */}
+                  
+                  <Route  path="/login" element={<Login/>} />{' '}
+                  <Route  path="/register" element={<Register/>} />{' '}
+                  {/* Login/Registration */}
+                  
+                  <Route path="/upsolve/codeforces" element={<CodeforcesUp/>}/> {' '}
+                  {/* Codeforces upsolve */}
+                  
+                  <Route  path="/upsolve/atcoder" element={<AtcoderUp/>} /> {' '}
+                  {/* Atcoder Upsolve */}
+                  
+                  <Route  path="/upsolve/codechef" element={<CodechefUp/>} /> {' '}
+                  {/* Codechef upsolve */}
 
-              <Route  path="/" element={<Homepage/>} /> {/* Homepage */}
+                  <Route  path="/" element={<Homepage/>} /> {/* Homepage */}
 
-              <Route  path="/profile/:id" element={<ProfileMatch/>} /> {' '}
-              {/* Profile, id - username */}
+                  <Route  path="/profile/:id" element={<ProfileMatch/>} /> {' '}
+                  {/* Profile, id - username */}
 
-              <Route  path="/:wise/:type" element={<LaddersLevel1/>} /> {' '}
-              {/* wise - topic,level | type - ladder,practice */}
+                  <Route  path="/:wise/:type" element={<LaddersLevel1/>} /> {' '}
+                  {/* wise - topic,level | type - ladder,practice */}
 
-              <Route path="/:wise/:type/:slug" element={<LaddersQuestionPage1/>} /> {' '}
-              {/* wise - topic,level | type - ladder,practice | slug is selected series */}
+                  <Route path="/:wise/:type/:slug" element={<LaddersQuestionPage1/>} /> {' '}
+                  {/* wise - topic,level | type - ladder,practice | slug is selected series */}
 
-              <Route  path="/problems" element={<ProblemsPage1/>} /> {' '}
-              {/* Problems page */}
+                  <Route  path="/problems" element={<ProblemsPage1/>} /> {' '}
+                  {/* Problems page */}
 
-              <Route path="/change_password_request" element={<ChangePassword/>}/> {' '}
-              {/* request to change [passowrd] */}
+                  <Route path="/change_password_request" element={<ChangePassword/>}/> {' '}
+                  {/* request to change [passowrd] */}
 
-              <Route path="/email-verified" element={<EmailVerfiedMsg/>}/>
+                  <Route path="/email-verified" element={<EmailVerfiedMsg/>}/>
 
-              <Route  path="/home" element={<Homepage/>} /> {/* Homepage */}
+                  <Route  path="/home" element={<Homepage/>} /> {/* Homepage */}
 
-              <Route  path="/createProfile" element={<FillInfo/>} /> {' '}
-              {/* Creating profile for first time login */}
+                  <Route  path="/createProfile" element={<FillInfo/>} /> {' '}
+                  {/* Creating profile for first time login */}
 
-              <Route  path="/forgotPass" element={<ForgotPass/>} /> {' '}
-              {/* Forgot password - email form */}
+                  <Route  path="/forgotPass" element={<ForgotPass/>} /> {' '}
+                  {/* Forgot password - email form */}
 
-              <Route  path="/aboutus" element={<AboutUs/>} />
+                  <Route  path="/aboutus" element={<AboutUs/>} />
 
-              <Route  path="/setNewPass" element={<NewPassword/>} /> {' '}
-              {/* Form to set new password */}
+                  <Route  path="/setNewPass" element={<NewPassword/>} /> {' '}
+                  {/* Form to set new password */}
 
-              <Route  path="/error" element={<Error404/>} />
-              <Route path="/updateProfile" element={<UpdateProfile/>} /> {' '}
-              {/* Form to update prpfile */}
+                  <Route  path="/error" element={<Error404/>} />
+                  <Route path="/updateProfile" element={<UpdateProfile/>} /> {' '}
+                  {/* Form to update prpfile */}
 
-              <Route  path="/privacy" element={<PrivacyPolicy/>} />
-              <Route  path="/terms" element={<TermsAndConditions/>} />
+                  <Route  path="/privacy" element={<PrivacyPolicy/>} />
+                  <Route  path="/terms" element={<TermsAndConditions/>} />
 
-              <Route  path="/" element={<Homepage/>} /> {/* Homepage */}
-              
-              <Route  path="*" element={<Error404/>} />
-            
-            </Routes>
-            {/* <Route element={ErrorPage}/> */}
-          </Router>
+                  <Route  path="/" element={<Homepage/>} /> {/* Homepage */}
+                  
+                  <Route  path="*" element={<Error404/>} />
+                
+                </Routes>
+                {/* <Route element={ErrorPage}/> */}
+              </Router>
+            </Content>
+            <Footer style={{ textAlign: 'center' }}>Codedigger ©2021 </Footer>
+          </Layout>
         </CredentialsContext.Provider>
     </>
   )
