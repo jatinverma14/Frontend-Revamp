@@ -152,6 +152,9 @@ const App = () => {
                 {/* wise - topic,level | type - ladder,practice | slug is selected series */}
                 <Route path="/problems" element={<ProblemsPage1 />} />
                 {/* Problems page */}
+
+                <Route path="/contests" element={<ContestPage1 />} />
+                {/* Contest page */}
                 <Route
                   path="/change_password_request"
                   element={<ChangePassword />}
