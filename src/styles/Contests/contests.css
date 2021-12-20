@@ -1,0 +1,211 @@
+.ant-layout-content{
+  background: linear-gradient(270deg,#0f1111,#121314);
+}
+/* The side navigation menu */
+.sidenav1 {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  opacity: 0;
+  top: -4rem;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.4s;
+  margin-top: 70px;
+  padding-left: 5px; /* 0.5 second transition effect to slide in the sidenav */
+  /* z-index: 10000; */
+  color: white;
+}
+
+/* The navigation menu links */
+.sidenav1 a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav1 a:hover,
+.offcanvas a:focus {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav1 .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.form-control {
+  height: 3rem;
+  width: 26rem;
+}
+
+.roww {
+  margin-bottom: 3rem;
+}
+
+.input-group {
+  justify-content: center;
+  margin-left: 1rem;
+  display: flex;
+  flex-wrap: nowrap;
+  margin-top: 5.5rem;
+}
+
+/* Heading title css */
+.page_heading {
+  text-align: center;
+  margin-bottom: 65px;
+  margin-top: 16px;
+  color: white;
+  font-size: 2.3rem;
+}
+
+.filter_buttonnn {
+  /* position: absolute; */
+  /* bottom: 77vh; */
+  float: right;
+  right: 6vw;
+  top: -4rem;
+  border-radius: 20px;
+}
+
+.refresh_buttonnn {
+  /* position: absolute;
+        bottom: 77vh; */
+  float: right;
+  right: 8vw;
+  top: -4rem;
+  border-radius: 20px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left 0.5s;
+  padding: 20px;
+}
+.sidenav1 {
+  right: 0;
+}
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav1 {
+    padding-top: 15px;
+  }
+  .sidenav1 a {
+    font-size: 18px;
+  }
+}
+.sidenav1 {
+  right: 0;
+}
+.filterHeading {
+  margin-left: 15px;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+}
+
+.filter_titles {
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.contests_page {
+  margin: 0px;
+  padding: 0px;
+  margin-left: 100px;
+  margin-right: 100px;
+  padding-bottom: 50px;
+}
+
+.sidenav_apply_button {
+  margin: 0px 0.5rem 0px 16px;
+  background-color: forestgreen;
+  color: #ffffff;
+  border-radius: 15px;
+}
+
+.sidenav_close_button {
+  margin-left: 5px;
+  background-color: firebrick;
+  color: #ffffff;
+  border-radius: 15px;
+}
+
+.div_filter_names {
+  color: white;
+}
+
+.switchFilter {
+  float: right;
+  right: 8px;
+  top: 4px;
+}
+
+.sideNavOpen {
+  /* border: 2px solid white; */
+  border-radius: 6px;
+  box-shadow: -4px -4px 10px #5842f2cf;
+  width: 28rem;
+  opacity: 1;
+  padding-left: 30px;
+  padding-right: 50px;
+}
+
+.sideNavClose {
+  width: 0;
+  opacity: 0;
+}
+
+.blur_bckgrnd {
+  filter: blur(8px);
+  opacity: 0.7;
+}
+
+.search_box {
+  width: 25rem;
+}
+
+@media screen and (max-width: 980px) {
+  .sideNavOpen {
+    width: 22rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .form-outline input {
+    width: 18rem;
+  }
+  .search_box {
+    width: 20rem;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .sideNavOpen {
+    width: 18rem;
+    padding-right: 25px;
+    padding-right: 15px;
+  }
+}
+
+.ant-input-search .ant-input-group .ant-input-affix-wrapper:not(:last-child){border-radius: 17px 0px 0px 17px;}
+.ant-input-search > .ant-input-group > .ant-input-group-addon:last-child .ant-input-search-button {border-radius: 0px 17px 17px 0px;}
+.ant-input-search > .ant-input-group > .ant-input-group-addon:last-child {border-radius: 0px 17px 17px 0px;}
+
+/* modal css */
+.ant-modal-header{background-color: #333534; color: #fff;border-radius: 15px 15px 0px 0px;}
+.ant-modal-content{background-color: #333534; color: #fff;border-radius: 15px;}
+.ant-modal-title,.ant-checkbox + span, .ant-modal-close-x{color: white;}
+.modal_diva_button{margin-left: 15px; border-radius: 15px;}
+.modal_set_button{border-radius: 15px; background-color: white; color: black; border-color: black;}
+.modal_set_button:hover{background-color: green; border-color: #0f1111;}
