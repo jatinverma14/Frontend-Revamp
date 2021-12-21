@@ -3,21 +3,28 @@ import React, { useState, useEffect } from 'react'
 // import Navbar from '../../components/Header/Navbar'
 // import FooterSmall from '../../components/Footer/FooterSmall'
 import queryString from 'query-string'
-import update from 'immutability-helper'
+import update from 'immutability-helper' // it'll be used in the func to change the difficulty. Immutability-helper is an alternative for react-addon-update (react-addon-update is no longer maintained).
 import AccordionCom from '../../components/AccordionCom'
+import difficultyObject from '../../utils/StaticData'
+import ConstestAPI from '../../actions/Contest'
 
 import 'antd/dist/antd.css'
 import '../../styles/Contests/contests.css'
 import { Button, Col, Switch, Input, Row } from 'antd'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
-import Modal_comm from './Modal_Com'
+import ModalForDivision from './ModalForDivision'
 
-function ContestPage({info, queryStr}) {
+function ContestPage({ info, queryStr }) {
   //queryStr is current url string
   const [datap, setDatap] = useState(queryStr.replace(/;/g, '&'))
 
+  //for sidenav
+  const [openSideNav, setOpenSideNav] = useState("");
+  //for blur bckground
+  const [blurBackground, setBlurBackground] = useState("");
+
   // search box
-  const {Search} = Input;
+  const { Search } = Input
 
   //Parsing into json
   const [queryDefault, setQueryDefault] = useState(
@@ -35,16 +42,6 @@ function ContestPage({info, queryStr}) {
 
   const [searchText, setSearchText] = useState()
 
-  //available difficulty levels
-  const difficultyLevels = [
-    'Div. 1',
-    'Div. 2',
-    'Div. 3',
-    'Div. 4',
-    'Educational',
-    'Global',
-  ]
-
   //configuring defaut display of difficulty
   const [displayDiff, setDisplayDiff] = useState(
     queryDefault.divs
@@ -60,16 +57,6 @@ function ContestPage({info, queryStr}) {
         }
       : { values: [false, false, false, false, false, false] }
   )
-
-  //available difficulty filters
-  const difficultyFilters = [
-    'Div. 1',
-    'Div. 2',
-    'Div. 3',
-    'Div. 4',
-    'Educational',
-    'Global',
-  ]
 
   //FIlter parameters
   const [gym, setGym] = useState(queryDefault.gym ? queryDefault.gym : false)
@@ -93,10 +80,10 @@ function ContestPage({info, queryStr}) {
   const changeDifficultyFilter = (event, lev) => {
     const res = event.target.checked
     setIsDiffChange(true)
-    const difficultyAdd = difficultyLevels[lev]
+    // const difficultyAdd = difficultyLevels[lev]
+    const difficultyAdd = difficultyObject.difficultyLevels[lev]
     if (res) {
       setDifficultyQueries([...difficultyQueries, difficultyAdd])
-      console.log(difficultyQueries)
       setDisplayDiff(
         update(displayDiff, {
           values: {
@@ -108,7 +95,7 @@ function ContestPage({info, queryStr}) {
       )
     } else {
       const newList = difficultyQueries.filter(
-        (item) => item != difficultyFilters[lev]
+        (item) => item != difficultyObject.difficultyFilter[lev]
       )
       setDifficultyQueries(newList)
       setDisplayDiff(
@@ -125,7 +112,7 @@ function ContestPage({info, queryStr}) {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    var urlTo = '/contests?'
+    let urlTo = '/contests?'
 
     if (isDiffChange && difficultyQueries.length > 0) {
       urlTo =
@@ -134,19 +121,14 @@ function ContestPage({info, queryStr}) {
           .replace(/"/g, '')
           .replace(/]|[[]/g, '')}`
     }
-    console.log(urlTo)
 
     if (gymCount) {
       urlTo = urlTo + `;gym=${JSON.stringify(gym)}`
     }
 
-    console.log(urlTo)
-
     if (mentorrCount) {
       urlTo = urlTo + `;mentor=${JSON.stringify(mentorr)}`
     }
-    console.log(urlTo)
-
     window.location.href = urlTo
   }
 
@@ -159,31 +141,18 @@ function ContestPage({info, queryStr}) {
 
   //opening filter block
   function openNav() {
-    document.getElementById('mySidenav1').classList.remove('sideNavClose')
-    document.getElementById('mySidenav1').classList.add('sideNavOpen')
-    document.getElementById('contests_page_id').classList.add('blur_bckgrnd')
-    document.getElementById('page_heading_id').classList.add('blur_bckgrnd')
-    document.getElementById('contest_nav_id').style.display = 'none'
+    setOpenSideNav('sideNavOpen');
+    setBlurBackground('blur_bckgrnd');
   }
 
   //closing filter block
   function closeNav() {
-    document.getElementById('mySidenav1').classList.remove('sideNavOpen')
-    document.getElementById('mySidenav1').classList.add('sideNavClose')
-    document.getElementById('contests_page_id').classList.remove('blur_bckgrnd')
-    document.getElementById('page_heading_id').classList.remove('blur_bckgrnd')
-    document.getElementById('contest_nav_id').style.display = 'block'
+    setOpenSideNav("sideNavClose");
+    setBlurBackground(null);
   }
 
-  useEffect(async () => {
-    await fetch(`https://api.codedigger.tech/contest/${queryStr}`, {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: `Bearer ${creds.access}`,
-      },
-    })
-      .then((data) => data.json())
+  useEffect(() => {
+    ConstestAPI(creds, queryStr)
       .then((res) => setProblems(res))
       .then((show) => setShow(false))
       .catch((error) => setErrors(true))
@@ -202,15 +171,11 @@ function ContestPage({info, queryStr}) {
   }
 
   return show == true ? (
-    <>
-      {/* <Loading /> */}
-    </>
+    <>{/* <Loading /> */}</>
   ) : (
     <>
-      <div id="contest_nav_id">
-        {/* <Navbar /> */}
-      </div>
-      <h3 className="page_heading" id="page_heading_id">
+      <div id="contest_nav_id">{/* <Navbar /> */}</div>
+      <h3 className={`page_heading ${blurBackground}`}  id="page_heading_id">
         Contests
       </h3>
       <Button className="filter_buttonnn" type="primary" onClick={openNav}>
@@ -224,9 +189,9 @@ function ContestPage({info, queryStr}) {
         Refresh
       </Button>
 
-      <div id="mySidenav1" className="sidenav1">
-        <Modal_comm
-          difflev={difficultyLevels}
+      <div id="mySidenav1" className = {`sidenav1 ${openSideNav}`}>
+        <ModalForDivision
+          difflev={difficultyObject.difficultyLevels}
           display={displayDiff}
           change={changeDifficultyFilter}
         />
@@ -251,12 +216,8 @@ function ContestPage({info, queryStr}) {
           />
         </div>
         <br></br> <br></br>
-        <Button className="sidenav_apply_button" onClick={handleSubmit}>
-          Apply
-        </Button>
-        <Button className="sidenav_close_button" onClick={closeNav}>
-          Close
-        </Button>
+        <Button className="sidenav_apply_button" onClick={handleSubmit}> Apply </Button>
+        <Button className="sidenav_close_button" onClick={closeNav}> Close </Button>
       </div>
 
       {!problems.result ? (
@@ -264,7 +225,7 @@ function ContestPage({info, queryStr}) {
         <h1>hi</h1>
       ) : (
         <>
-          <div className="contests_page" id="contests_page_id">
+          <div className={`contests_page ${blurBackground}`} id="contests_page_id">
             <div className="roww">
               <div className="input-group">
                 <div>
@@ -275,28 +236,24 @@ function ContestPage({info, queryStr}) {
                     size="large"
                     onChange={(e) => setSearchText(e.target.value)}
                     onSearch={handleSearch}
-                    className='search_box'
-                    style={{borderRadius:15}}
+                    className="search_box"
+                    style={{ borderRadius: 15 }}
                   />
                 </div>
               </div>
             </div>
-            <Row gutter={[16,16]}>
-              {console.log(problems.result)}
+            <Row gutter={[16, 16]}>
               {problems.result.map((playlist, i) => {
                 return (
                   <>
-                    <Col
-                      span={screen.width > 768 ? 12 : 25}
-                      style={{ marginBottom: '1rem' }}
-                    >
+                    <Col span={screen.width > 768 ? 12 : 25} style={{ marginBottom: '1rem' }} >
                       <AccordionCom problem={playlist} />
                     </Col>
                   </>
                 )
               })}
-              </Row>
-            </div>
+            </Row>
+          </div>
           {/* <FooterSmall /> */}
         </>
       )}

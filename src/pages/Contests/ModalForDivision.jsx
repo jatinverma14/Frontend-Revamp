@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button, Checkbox } from 'antd';
 
-const Modal_comm = (props) => {
+const ModalForDivision = (props) => {
     const [visible, setVisible] = useState(false);
 
     const showModal = () =>{
@@ -43,4 +43,4 @@ const Modal_comm = (props) => {
      );
 }
  
-export default Modal_comm;
+export default ModalForDivision;
