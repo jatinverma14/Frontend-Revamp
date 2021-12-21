@@ -1,0 +1,27 @@
+.mainCard {
+    border-radius: 10px;
+    border-left: 12px solid #e0e0e0;
+  }
+  
+  @media screen and (max-width:768px) {
+      .mainCard{
+          min-width: 80vw;
+          max-width: 80vw;
+          margin: 0 -28px;
+      }
+  }
+  
+  .problemName a {
+    border: 2px solid #e0e0e0;
+    color: black;
+    border-color: rgba(148, 142, 142, 0.637);
+    padding: 5px 10px;
+    border-radius: 15px;
+  }
+  
+  .problemName a:hover {
+    /* color: black; */
+    /* border-color: black; */
+    box-shadow: 1px 1px 13px rgb(56, 56, 56);
+  }
+  
