@@ -1,4 +1,4 @@
-const difficultyObject = {
+const DIFFICULTY_OBJECT = {
   difficultyLevels: [
     'Div. 1',
     'Div. 2',
@@ -17,4 +17,4 @@ const difficultyObject = {
   ],
 }
 
-export default difficultyObject
+export default DIFFICULTY_OBJECT

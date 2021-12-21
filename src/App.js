@@ -33,6 +33,7 @@ import PrivacyPolicy from './pages/ExtraInfo/PrivacyPolicy'
 import TermsAndConditions from './pages/ExtraInfo/TermsAndConditions'
 import Contests from '../src/pages/Contests/Contests'
 import { Layout, Menu } from 'antd'
+import ContestAPI from './actions/Contest'
 
 const { Header, Footer, Content } = Layout
 
@@ -98,7 +99,7 @@ const App = () => {
     let location = useLocation()
     return (
       //location.search is the part of url after ? symbol
-      <Contests queryStr={location.search} />
+      <Contests queryStr={location.search} ContestAPI = {ContestAPI} />
     )
   }
 

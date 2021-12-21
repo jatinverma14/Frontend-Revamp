@@ -5,20 +5,18 @@ import React, { useState, useEffect } from 'react'
 import queryString from 'query-string'
 import update from 'immutability-helper' // it'll be used in the func to change the difficulty. Immutability-helper is an alternative for react-addon-update (react-addon-update is no longer maintained).
 import AccordionCom from '../../components/AccordionCom'
-import difficultyObject from '../../utils/StaticData'
-import ConstestAPI from '../../actions/Contest'
-
-import 'antd/dist/antd.css'
-import '../../styles/Contests/contests.css'
+import DIFFICULTY_OBJECT from '../../utils/StaticData'
 import { Button, Col, Switch, Input, Row } from 'antd'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import ModalForDivision from './ModalForDivision'
+import 'antd/dist/antd.css'
+import '../../styles/Contests/contests.css'
 
-function ContestPage({ info, queryStr }) {
+function ContestPage({ queryStr, ContestAPI }) {
   //queryStr is current url string
   const [datap, setDatap] = useState(queryStr.replace(/;/g, '&'))
 
-  //for sidenav
+  //for sidenav (for adding a class)
   const [openSideNav, setOpenSideNav] = useState("");
   //for blur bckground
   const [blurBackground, setBlurBackground] = useState("");
@@ -81,7 +79,7 @@ function ContestPage({ info, queryStr }) {
     const res = event.target.checked
     setIsDiffChange(true)
     // const difficultyAdd = difficultyLevels[lev]
-    const difficultyAdd = difficultyObject.difficultyLevels[lev]
+    const difficultyAdd = DIFFICULTY_OBJECT.difficultyLevels[lev]
     if (res) {
       setDifficultyQueries([...difficultyQueries, difficultyAdd])
       setDisplayDiff(
@@ -95,7 +93,7 @@ function ContestPage({ info, queryStr }) {
       )
     } else {
       const newList = difficultyQueries.filter(
-        (item) => item != difficultyObject.difficultyFilter[lev]
+        (item) => item != DIFFICULTY_OBJECT.difficultyFilter[lev]
       )
       setDifficultyQueries(newList)
       setDisplayDiff(
@@ -134,7 +132,6 @@ function ContestPage({ info, queryStr }) {
 
   //searching for a contest
   const handleSearch = (e) => {
-    // e.preventDefault()
     const searchUrl = `/contests/?divs=${searchText}`
     window.location.href = searchUrl
   }
@@ -151,8 +148,9 @@ function ContestPage({ info, queryStr }) {
     setBlurBackground(null);
   }
 
+  //rendering contests
   useEffect(() => {
-    ConstestAPI(creds, queryStr)
+    ContestAPI(creds, queryStr)
       .then((res) => setProblems(res))
       .then((show) => setShow(false))
       .catch((error) => setErrors(true))
@@ -190,8 +188,9 @@ function ContestPage({ info, queryStr }) {
       </Button>
 
       <div id="mySidenav1" className = {`sidenav1 ${openSideNav}`}>
-        <ModalForDivision
-          difflev={difficultyObject.difficultyLevels}
+        {/* modal popup */}
+        <ModalForDivision 
+          difflev={DIFFICULTY_OBJECT.difficultyLevels}
           display={displayDiff}
           change={changeDifficultyFilter}
         />
@@ -229,6 +228,7 @@ function ContestPage({ info, queryStr }) {
             <div className="roww">
               <div className="input-group">
                 <div>
+                  {/* search box */}
                   <Search
                     placeholder="input search text"
                     allowClear

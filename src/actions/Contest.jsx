@@ -1,4 +1,3 @@
-// import axios from 'axios';
 export default async function getProblems(creds, queryStr) {
   return await fetch(`https://api.codedigger.tech/contest/${queryStr}`, {
     method: 'GET',
