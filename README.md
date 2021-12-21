@@ -1,70 +1,176 @@
-# Getting Started with Create React App
+# Codedigger Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Codedigger][codedigger-shield]][codedigger]
+[![Codedigger API][codedigger-api-shield]][api]
 
-## Available Scripts
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
 
-In the project directory, you can run:
+[![Apache License][license-shield]][license-url]
+[![Contributor Covenant][code-of-conduct-shield]][code-of-conduct-url]
 
-### `yarn start`
+[![LinkedIn][linkedin-shield]][linkedin-url]
+[![Discord][discord-shield]][discord-url]
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Table of Contents
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1.  [Introduction](#introduction)
 
-### `yarn test`
+2.  [Getting Started](#getting-started)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    1.  [Fork, clone locally and create a branch](#fork-clone-locally--create-a-branch)
+    2.  [Setting Environment First Time](#setting-environment-first-time)
+    3.  [Starting Development Server](#starting-development-server-on-windowslinux)
+    4.  [Using Docker](#using-docker)
 
-### `yarn build`
+3.  [Code of Conduct](#code-of-conduct)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4.  [Contributing](#contributing)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+5.  [License](#license)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+6.  [How to Get Help](#how-to-get-help)
 
-### `yarn eject`
+## Introduction
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+This is the main Frontend Repository of the [Codedigger] Website.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Codedigger aims at accumulating the data of competitive programming platforms ([Codeforces], [Codechef], [Atcoder], [SPOJ] and [UVA Online Judge]) into one platform. We used their publicly available APIs and introduced several unique features into our application such as friends, mentors, ladders, upsolve, problem and contest filter. This can be the ultimate stop for everyone practicing competitive programming.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+User can practice topicwise list to expertise any topic, levelwise list to practice based on rating and difficulty, or can create their own list and follow that. They can filter problems based on difficulty, tag, or solved by mentor from all the sites combined at one place.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Upsolving means to solve those problems, you're not able to solve during the contest. With the help of codedigger, you will be able to upsolve codeforces, codechef, and atcoder contests in an easy and better way.
 
-## Learn More
+## Getting Started
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Fork, clone locally & create a branch
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Fork [Codedigger Frontend](https://help.github.com/articles/fork-a-repo) repository and clone at your local
 
-### Code Splitting
+```sh
+git clone https://github.com/<yourGithubUsername>/Frontend.git
+cd Frontend/
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Create a branch with a descriptive name. A good branch name would be :
 
-### Analyzing the Bundle Size
+```sh
+git checkout -b feature/AmazingFeature
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```sh
+git checkout -b bugfix/user
+```
 
-### Making a Progressive Web App
+### Setting Environment First Time
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### **Windows**
 
-### Advanced Configuration
+Follow these [steps](https://www.liquidweb.com/kb/install-react-js-windows/) to set your virtual environment for Windows.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+#### **Linux**
 
-### Deployment
+Follow these [steps](https://www.tecmint.com/install-reactjs-on-ubuntu/) to set your virtual environment for Linux.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Starting Development Server on Windows/Linux
 
-### `yarn build` fails to minify
+```sh
+npm install && npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```sh
+Navigate to localhost:3000/ to open the website.
+```
+
+### Using Docker
+
+For those familiar with Docker, you can also build and run the project through a container.
+
+#### **Development build**
+
+Building and running a static container:
+
+```sh
+docker build . -t frontend:dev
+docker run -p 3000:3000 frontend:dev
+```
+
+To build and run a container with live-reload for development, use docker compose instead:
+
+```sh
+docker-compose up -d
+```
+
+#### **Production Build**
+
+```sh
+docker build . -f Dockerfile.prod -t frontend:prod
+docker run -p 80:80 frontend:prod
+```
+
+## Code of Conduct
+
+This project and everyone participating in it is governed by the [Codedigger Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to contact.codedigger@gmail.com.
+
+## Contributing
+
+We encourage you to participate in this open source project. We love Pull Requests, Bug Reports, ideas, (security) code reviews or any other kind of positive contribution. Please review [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to file an issue or pr.
+
+<!-- LICENSE -->
+
+## License
+
+Copyright 2021 Codedigger
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+<!-- CONTACT -->
+
+## How to Get Help
+
+Email us - contact.codedigger@gmail.com
+
+[Join][discord-url]! our Discord Community
+
+**[Back to top](#table-of-contents)**
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/Code-dig-ger/Frontend.svg?style=for-the-badge
+[contributors-url]: https://github.com/Code-dig-ger/Frontend/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Code-dig-ger/Frontend.svg?style=for-the-badge
+[forks-url]: https://github.com/Code-dig-ger/Frontend/network/members
+[stars-shield]: https://img.shields.io/github/stars/Code-dig-ger/Frontend.svg?style=for-the-badge
+[stars-url]: https://github.com/Code-dig-ger/Frontend/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Code-dig-ger/Frontend.svg?style=for-the-badge
+[issues-url]: https://github.com/Code-dig-ger/Frontend/issues
+[license-shield]: https://img.shields.io/github/license/Code-dig-ger/Frontend.svg?style=for-the-badge
+[license-url]: https://github.com/Code-dig-ger/Frontend/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/company/codedigger
+[code-of-conduct-shield]: https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg?style=for-the-badge
+[code-of-conduct-url]: CODE_OF_CONDUCT.md
+[discord-shield]: https://img.shields.io/badge/-Discord-555?style=for-the-badge&logo=discord&logoColor=white
+[discord-url]: https://discord.gg/4ZeNgUn7cF
+[api]: https://api.codedigger.tech/
+[codedigger]: https://codedigger.tech
+[codeforces]: https://codeforces.com/
+[codechef]: https://www.codechef.com/
+[atcoder]: https://atcoder.jp/
+[spoj]: https://www.spoj.com/
+[uva online judge]: https://onlinejudge.org/
+[codedigger-shield]: https://img.shields.io/badge/-Codedigger-555?style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAuFJREFUOE+t1G1IE3EcB/DvFEPnmDrN5sPKxKGixgqns5n0oiezMl8EQSgESW8SqiFBRdCLMEhCKyopyNIsDErrRdmDmrFUlKInsGTMBW63ebc5t91s3ba43c5tmCHkwb24O/jc9////f4/AVb4Eqywh6VBoTANwoRqMIwStD2jsOUcflM2o/3zxNjcwGgvTZLGv4VZDIpEqShQNyFeVAuSiAFlAigC6lf3ECWIgtdFg3HSzMy74fv6ru5TsLjM4XAkKMstxo4Dz+Cck4I0YeG2BkEAjMsNr8sNxkXDQ9rMuuvt1e7JqVEeDYGrM+U4cnYUDlsSSCKEsbCVQPnrDgh8vgjQS9PwWO123dVbKo+RmmDREHiydQjixC1cKgLsUqPsFmSW50OiyEVCgRw+N5sslJAFvU4ajh/6EUNb52YAfg7MV1bg2IW3oWQEoh0z2NRQhST5WvgYJrDEwP6FgwvvaEzdfrht/uf0Gw48pGmGepcmHFyvkkG+pyTweTHIw9xP2D219GtbqcHh4xx4ovkp5Iq9bDX5QhQfVkOSLf0HyEE8aPvw5TnR07ebAzUtvcgp2sclNAKUGcV1pZDkpC8TpDH78esL05O+Sg6sbWyGulITahUC6zZKkVtTtmzQ0v/+GjU43MCBhaqtaGgaWEhIEoiaNUNRvx0phdlL7GFoyWzB9Hce7PylN77k20aA021axIvLAicj2IcCqxlShQzJRdmQKDfA7/EEqxxZFMfk1LjhZgdbwWDbsCnTs/JQf34EDmtCeHH4bVA9uoIYYWywffh+pOGx2R261vYyD0F8i2xs9ikrX4Wqul447akBKJCWu0u7LmOVOJ4DnW4w7CmhbKThRud+x3eddvHR498IU9JQUnEJIvFBkKZoHla2X0RsciI7GFjUS2nHu013Hze6KWp66eEQ/iUuToakNTXw+pWg5zLyzhz1w+czOT9NjJFDYz3zJpNheePrPyfuik/sP0+iITNZPL3cAAAAAElFTkSuQmCC
+[codedigger-api-shield]: https://img.shields.io/badge/Codedigger-API-yellowgreen?style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAuFJREFUOE+t1G1IE3EcB/DvFEPnmDrN5sPKxKGixgqns5n0oiezMl8EQSgESW8SqiFBRdCLMEhCKyopyNIsDErrRdmDmrFUlKInsGTMBW63ebc5t91s3ba43c5tmCHkwb24O/jc9////f4/AVb4Eqywh6VBoTANwoRqMIwStD2jsOUcflM2o/3zxNjcwGgvTZLGv4VZDIpEqShQNyFeVAuSiAFlAigC6lf3ECWIgtdFg3HSzMy74fv6ru5TsLjM4XAkKMstxo4Dz+Cck4I0YeG2BkEAjMsNr8sNxkXDQ9rMuuvt1e7JqVEeDYGrM+U4cnYUDlsSSCKEsbCVQPnrDgh8vgjQS9PwWO123dVbKo+RmmDREHiydQjixC1cKgLsUqPsFmSW50OiyEVCgRw+N5sslJAFvU4ajh/6EUNb52YAfg7MV1bg2IW3oWQEoh0z2NRQhST5WvgYJrDEwP6FgwvvaEzdfrht/uf0Gw48pGmGepcmHFyvkkG+pyTweTHIw9xP2D219GtbqcHh4xx4ovkp5Iq9bDX5QhQfVkOSLf0HyEE8aPvw5TnR07ebAzUtvcgp2sclNAKUGcV1pZDkpC8TpDH78esL05O+Sg6sbWyGulITahUC6zZKkVtTtmzQ0v/+GjU43MCBhaqtaGgaWEhIEoiaNUNRvx0phdlL7GFoyWzB9Hce7PylN77k20aA021axIvLAicj2IcCqxlShQzJRdmQKDfA7/EEqxxZFMfk1LjhZgdbwWDbsCnTs/JQf34EDmtCeHH4bVA9uoIYYWywffh+pOGx2R261vYyD0F8i2xs9ikrX4Wqul447akBKJCWu0u7LmOVOJ4DnW4w7CmhbKThRud+x3eddvHR498IU9JQUnEJIvFBkKZoHla2X0RsciI7GFjUS2nHu013Hze6KWp66eEQ/iUuToakNTXw+pWg5zLyzhz1w+czOT9NjJFDYz3zJpNheePrPyfuik/sP0+iITNZPL3cAAAAAElFTkSuQmCC
