@@ -1,0 +1,297 @@
+*
+{
+    background-color : rgb(2 4 29);
+    /* background: linear-gradient(black,); */
+    /* background-color: black; */
+    /* opacity: 0.8; */
+
+    
+}
+
+
+
+.solved {
+    color: #30ec30;
+    border-radius: 10px;
+    height: 90px;
+    text-align: center;
+    padding-top: 10px;
+    background: linear-gradient(180deg, #030321, #268c8c);
+    width: 20rem;
+    /* border-left: 2px solid #030321; */
+    box-shadow: 2px 2px 2px 3px black;
+  }
+  .wrong {
+    /* background-color: rgb(0, 0, 0); */
+    background: linear-gradient(180deg, #030321, #268c8c);
+
+    color: white;
+    border-radius: 10px;
+    height: 90px;
+    width: 19rem;
+    text-align: center;
+    padding-top: 10px;
+    box-shadow: 2px 2px 2px 3px black;
+  }
+  .upsolved {
+    /* background-color: rgb(0, 0, 0); */
+    /* background: linear-gradient(red, yellow); */
+    background: linear-gradient(180deg, #030321, #268c8c);
+    
+    /* background: linear-gradient(aqua, white); */
+    
+    color: tomato;
+    border-radius: 10px;
+    height: 90px;
+    text-align: center;
+    width: 20rem;
+    padding-top: 10px;
+    box-shadow: 2px 2px 2px 3px black;
+    
+    border-left: 2px solid lightskyblue;
+  }
+  .contestName {
+    font-weight: 900;
+    box-shadow: 2px 2px 2px 3px black;
+    font-size: larger;
+    border-radius: 10px;
+    background-color: #dcdcc5;;
+    /* background: aqua; */
+    height: 90px;
+    text-align: center;
+    padding-top: 10px;
+    margin-left: 1.2rem;
+    color: white;
+    display: flex;
+    justify-content: center;
+    width: 18rem;
+    
+    align-items: center;
+  }
+  .not_attempted {
+   
+    background: linear-gradient(180deg, #030321, #268c8c);
+    /* width: 100%; */
+    width: 20rem;
+    color: black;
+    box-shadow: 2px 2px 2px 3px black;
+
+    /* color: orange; */
+  
+    border-radius: 10px;
+    height: 90px;
+    text-align: center;
+    padding-top: 10px;
+    /* border-left: 2px solid #bba187; */
+  }
+  
+  .contestRow {
+    height: 90px;
+    
+    border-radius: 10px;
+  }
+  .tags {
+    background: rgb(126, 122, 8);
+    background: linear-gradient(
+      0deg,
+      rgba(126, 122, 8, 1) 0%,
+      rgba(253, 208, 45, 1) 91%
+    );
+    border: 1px solid rgb(39, 38, 38);
+    border-radius: 5px;
+    margin-left: 8px;
+  }
+  
+  Col {
+    border-radius: 10px;
+  }
+  .heads {
+    text-align: center;
+  }
+  .flags {
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .vir {
+    float: right;
+    border-radius: 10px;
+    color: rgb(255, 250, 250);
+    background-color: rgb(0, 83, 161);
+    padding: 8px;
+  }
+  .box {
+    width: 20%;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px;
+  
+    border-radius: 20px/50px;
+    background-clip: padding-box;
+    text-align: center;
+  }
+  
+  .button {
+    font-size: 0.8rem;
+    padding: 5px;
+    color: #fff;
+    border: 2px solid #06d85f;
+    border-radius: 20px/50px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+  }
+  .button:hover {
+    background: #06d85f;
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(3, 3, 3, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+  }
+  .overlay:target {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .popover {
+    margin: 2px auto;
+    padding: 2px;
+    background: #fff;
+    border-radius: 5px;
+    width: 20%;
+    position: relative;
+    transition: all 2s ease-in-out;
+    background-color: beige;
+
+  }
+  
+  .popover h2 {
+    margin-top: 0;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+  }
+  .popover .close {
+    position: absolute;
+    top: 2px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+  }
+  .popup .close:hover {
+    color: #06d85f;
+  }
+  .popup .content {
+    max-height: 10%;
+    overflow: auto;
+  }
+  
+  @media screen and (max-width: 700px) {
+    .box {
+      width: 40%;
+    }
+    .popup {
+      width: 40%;
+    }
+  }
+  .loading-animation {
+    display: block;
+    margin: auto;
+  }
+  .paginator {
+    text-align: center;
+    margin: auto;
+    padding: 30px;
+    display: block;
+  }
+  .pagination {
+    border-radius: 5px;
+    text-align: center;
+  }
+  a {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+  }
+  .upperButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 2px;
+    border-radius: 3px;
+    margin: 2px;
+  }
+  .green {
+    color: #30ec30;
+  }
+  .red {
+    color: salmon;
+  }
+  .viol {
+    color: orange;
+  }
+  .blue {
+    color: orange;
+  }
+  .tagsbox {
+    color: white;
+    /* background-color: beige; */
+  }
+  .active-page {
+    background-color: rgb(0, 162, 255);
+    padding: 9px;
+  }
+  
+  .page-link {
+    background-color: black;
+  }
+  .paginate {
+    align-items: center;
+    display: flex;
+  }
+  .body {
+    padding-left: 8px;
+    overflow: hidden;
+    margin-bottom: 100px;
+  }
+
+
+
+.ant-switch
+{
+  
+  background-color: rgb(58, 55, 55);
+}
+.ant-switch-checked
+{
+  
+  background-color: rgb(14, 94, 7);
+}
+
+
+
+.pagination
+{
+  display: flex;
+}
+
+
+
+  .react-multi-carousel-item
+  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
