@@ -53,7 +53,7 @@ const Atcoder = () => {
         },
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
-            items: 4,
+            items: 3,
         },
         tablet: {
             breakpoint: { max: 1024, min: 464 },
@@ -171,8 +171,8 @@ const Atcoder = () => {
                                         {res.problems.length > 0 ? (
                                             <>
                                                 <Row gutter={[16, 10]} className="contestRow">
-                                                    <Col span={4}>
-                                                        <div style={{ width: "14rem" }} className="contestName">
+                                                    <Col span={5}>
+                                                        <div style={{ width: "18rem" }} className="contestName">
                                                             <h6
                                                                 style=
                                                                 {{
@@ -183,7 +183,7 @@ const Atcoder = () => {
                                                                 }}>{res.name}</h6>
                                                         </div>
                                                     </Col>
-                                                    <Col span={20}>
+                                                    <Col span={19}>
                                                         <Carousel responsive={responisve}>
                                                             {res.problems.map((prob) => {
                                                                 if (prob.status === 'solved') {
