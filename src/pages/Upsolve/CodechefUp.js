@@ -173,7 +173,7 @@ const pageNumbers = []
                                       <Col span={19}>
                                         <div className="solved">
 
-                                            <CommonQues index = { prob.index} name = {prob.name} className = "green" tags = {prob.tags}  status = "SOLVED"/>
+                                            <CommonQues url = {prob.url} index = { prob.index} name = {prob.name} className = "green" tags = {prob.tags}  status = "SOLVED"/>
                                         </div> 
                                       </Col>
                                     )
@@ -184,7 +184,7 @@ const pageNumbers = []
                                       {' '}
                                       <div className="wrong">
 
-                                          <CommonQues index = { prob.index} name = {prob.name} className = "red" tags = {prob.tags}  status = "WRONG"/>
+                                          <CommonQues  url = {prob.url} index = { prob.index} name = {prob.name} className = "red" tags = {prob.tags}  status = "WRONG"/>
 
                                       </div>
                                     </Col>
@@ -194,7 +194,7 @@ const pageNumbers = []
                                     return (
                                       <Col span={19}>
                                         <div className="upsolved">
-                                        <CommonQues index = { prob.index} name = {prob.name} className ="blue" tags = {prob.tags}  status = "UNSOLVED"/>
+                                        <CommonQues  url = {prob.url} index = { prob.index} name = {prob.name} className ="blue" tags = {prob.tags}  status = "UNSOLVED"/>
                                         </div>
                                       </Col>
                                     )
@@ -205,7 +205,7 @@ const pageNumbers = []
                                       {' '}
                                       <div className="not_attempted">
                                      
-                                         <CommonQues index = { prob.index} name = {prob.name} className = "viol" tags = {prob.tags}  status = "NOT ATTEMPTED"/>
+                                         <CommonQues  url = {prob.url} index = { prob.index} name = {prob.name} className = "viol" tags = {prob.tags}  status = "NOT ATTEMPTED"/>
                                       </div>
                                     </Col>
                                   )
