@@ -173,6 +173,7 @@
 
 .search_box {
   width: 25rem;
+  border-radius: 15px;
 }
 
 @media screen and (max-width: 980px) {
@@ -201,6 +202,7 @@
 .ant-input-search .ant-input-group .ant-input-affix-wrapper:not(:last-child){border-radius: 17px 0px 0px 17px;}
 .ant-input-search > .ant-input-group > .ant-input-group-addon:last-child .ant-input-search-button {border-radius: 0px 17px 17px 0px;}
 .ant-input-search > .ant-input-group > .ant-input-group-addon:last-child {border-radius: 0px 17px 17px 0px;}
+.ant-input-suffix{display: none;}
 
 /* modal css */
 .ant-modal-header{background-color: #333534; color: #fff;border-radius: 15px 15px 0px 0px;}

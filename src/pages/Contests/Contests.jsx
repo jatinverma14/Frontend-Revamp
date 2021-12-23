@@ -9,7 +9,6 @@ import DIFFICULTY_OBJECT from '../../utils/StaticData'
 import { Button, Col, Switch, Input, Row } from 'antd'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import ModalForDivision from './ModalForDivision'
-import 'antd/dist/antd.css'
 import '../../styles/Contests/contests.css'
 
 function ContestPage({ queryStr, ContestAPI }) {
@@ -227,7 +226,6 @@ function ContestPage({ queryStr, ContestAPI }) {
           <div className={`contests_page ${blurBackground}`} id="contests_page_id">
             <div className="roww">
               <div className="input-group">
-                <div>
                   {/* search box */}
                   <Search
                     placeholder="input search text"
@@ -237,9 +235,7 @@ function ContestPage({ queryStr, ContestAPI }) {
                     onChange={(e) => setSearchText(e.target.value)}
                     onSearch={handleSearch}
                     className="search_box"
-                    style={{ borderRadius: 15 }}
                   />
-                </div>
               </div>
             </div>
             <Row gutter={[16, 16]}>
