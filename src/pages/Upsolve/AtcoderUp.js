@@ -4,11 +4,13 @@ import { Row, Col } from 'antd';
 import Carousel from 'react-multi-carousel'
 import "react-multi-carousel/lib/styles.css";
 import '../../styles/Upsolve/upsolve.css'
-import { atcoder } from './upsolve.actions'
 
 import logo from '../../assets/SitesImages/Atcoder/atcoder.png'
 import refresh from '../../assets/Upsolve/reload.png'
 import { Switch } from 'antd';
+import { AtcoderAPI } from '../../actions/Upsolve';
+import CommonCard from './CommonContestCard';
+import CommonQues from './CommonQues';
 
 
 const Atcoder = () => {
@@ -32,52 +34,11 @@ const Atcoder = () => {
         setPage(page)
         setPrev(null)
         setNext(null)
-        async function fetchData() {
-            const creds = JSON.parse(localStorage.getItem('creds'))
-            const acc = creds.access
-            const response = await atcoder(acc, page, Prac)
-            if (response.status === 200) {
-                const data = await response.json()
-                //  console.log(data);
-                if (data.status === 'OK' && data.result.length > 0) {
-                    //console.log("yipee");
-                    const newLinks = data.links
-                    setFirst(newLinks.first.split('=')[1])
-                    setLast(newLinks.last.split('=')[1])
-                    if (newLinks.prev !== null) {
-                        setPrev(newLinks.prev.split('=')[1])
-                    }
-                    if (newLinks.next !== null) {
-                        setNext(newLinks.next.split('=')[1])
-                    }
-                    setLast(data.meta.last_page)
-                    setCurPage(data.meta.current_page)
-                    const result = await data.result
-                    await setData(result)
-                } else if (Prac == true) {
-                    localStorage.setItem(
-                        'err',
-                        'Please practice or compete to view this page'
-                    )
-                    window.location = '/home'
-                } else {
-                    setPrac(true)
-                }
-
-                setLoader(false)
-            } else {
-                const data = await response.json()
-
-                if (
-                    data.error ===
-                    "You haven't Entered your Atcoder Handle in your Profile.. Update Now!"
-                ) {
-                    localStorage.setItem('err', data.error)
-                    window.location = '/home'
-                }
-            }
-        }
-        fetchData()
+        
+        AtcoderAPI(setFirst,  setLast,
+            page,Prac,
+            setPrev,
+            setNext,setCurPage,setData,setLoader)
     }, [page, Prac, update])
     if (last != null) {
         for (let i = 1; i <= last; i++) {
@@ -148,7 +109,7 @@ const Atcoder = () => {
                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                 <div style={{ display: 'flex' }}>
                                     <h3 textAlign="center">ATCODER</h3>
-                                    <img style={{ width: '60px', height: '50px' }} src={logo} />
+                                    <img style={{ width: '60px', height: '50px', background: "white" }} src={logo} />
                                 </div>
 
                                 <div style={{ display: 'flex', float: 'right' }}>
@@ -165,18 +126,7 @@ const Atcoder = () => {
                                         </h6>
                                         <div style={{ display: 'block', marginLeft: '25px' }}>
                                             <Switch style={{ backgroundcolor: "white" }} defaultUnChecked onChange={ChangePage} />
-                                            {/* <ToggleButton
-                        inactiveLabel={''}
-                        activeLabel={''}
-                        value={Prac || false}
-                        onToggle={(val) => {
-                          setPrac(!Prac)
-                          setTimeout(() => {
-                            setLoader(true)
-                          }, 1000)
-                          setPage(1)
-                        }}
-                      /> */}
+
                                         </div>
                                     </div>
                                     <div style={{ float: 'right', borderRadius: '5px' }}>
@@ -222,7 +172,7 @@ const Atcoder = () => {
                                             <>
                                                 <Row gutter={[16, 10]} className="contestRow">
                                                     <Col span={4}>
-                                                        <div style = {{width: "14rem"}} className="contestName">
+                                                        <div style={{ width: "14rem" }} className="contestName">
                                                             <h6
                                                                 style=
                                                                 {{
@@ -283,7 +233,7 @@ const Atcoder = () => {
                                                                                     </a>
                                                                                     <br></br>
 
-                                                                                    <h7 style={{ background: "none" }} className="blue">UPSOLVED</h7>
+                                                                                    <h7 style={{ background: "none" }} className="blue">UNSOLVED</h7>
                                                                                 </div>
                                                                             </Col>
                                                                         )

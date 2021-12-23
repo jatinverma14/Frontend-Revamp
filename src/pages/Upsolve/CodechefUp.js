@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import Validate from './Validate'
 import '../../styles/Upsolve/upsolve.css'
 import { Spin, Alert } from 'antd';
-
 import Carousel from 'react-multi-carousel'
 import { Row, Col } from 'antd';
 import "react-multi-carousel/lib/styles.css";
@@ -12,15 +11,17 @@ import Tags from '../../assets/Upsolve/tags-icon2.png'
 import logo from '../../assets/SitesImages/Codechef/codechef-png.png'
 import refresh from '../../assets/Upsolve/reload.png'
 import 'antd/dist/antd.css';
+import {CodechefAPI} from '../../actions/Upsolve';
+import CommonCard from './CommonContestCard';
+import CommonQues from './CommonQues';
 
-//actions import
-import { codechef } from './upsolve.actions'
+
 
 
 const Codechef = () => {
-  //Validate();
-  const pageNumbers = []
-
+let [update, setUpdate] = useState(0)
+const [wn, setWN] = useState(false)
+const pageNumbers = []
   const [page, setPage] = useState(1)
   const [loader, setLoader] = useState(false)
   const [prev, setPrev] = useState(null)
@@ -29,8 +30,7 @@ const Codechef = () => {
   const [last, setLast] = useState(null)
   const [conData, setData] = useState([])
   const [curPage, setCurPage] = useState(1)
-  let [update, setUpdate] = useState(0)
-  const [wn, setWN] = useState(false)
+
   useEffect(() => {
     setFirst(null)
     setLast(null)
@@ -38,82 +38,32 @@ const Codechef = () => {
     setPrev(null)
     setNext(null)
     Validate()
-    async function fetchData() {
-      //Validate();
-
-      const creds = JSON.parse(localStorage.getItem('creds'))
-      console.log(creds);
-      const acc = creds.access
-      const response = await codechef(acc, page)
-      if (response.status === 200) {
-        const data = await response.json()
-
-        if (data.status === 'OK') {
-          
-          if (data.result.length > 0) {
-
-            const newLinks = data.links
-            await setFirst(newLinks.first.split('=')[1])
+    
+// calling fetchApi function
+    CodechefAPI(setFirst,  setLast,
+      page,
+      setPrev,
+      setNext,setCurPage,setData,setLoader)
 
 
-            await setLast(newLinks.last.split('=')[1])
-
-            if (newLinks.prev !== null) {
-              setPrev(newLinks.prev.split('=')[1])
-            }
-            if (newLinks.next !== null) {
-              setNext(newLinks.next.split('=')[1])
-            }
-            await setLast(data.meta.last_page)
-            await setCurPage(data.meta.current_page)
-          }
-          else {
-            localStorage.setItem(
-              'err',
-              'Codechef upsolve is available when you participate in atleast one contest'
-            )
-            window.location = '/home'
-          }
-        } else {
-          
-          localStorage.setItem('err', 'No contest found for this handle')
-          window.location = '/home'
-        }
-
-        const result = await data.result
-        await setData(result)
-        setLoader(false)
-      } else if (response.status == 500) {
-        localStorage.setItem('err', 'No contest found for this handle')
-        window.location = '/home'
-      } else {
-        const data = await response.json()
-        localStorage.setItem('err', data.error)
-        window.location = '/home'
-      }
-    }
-
-    fetchData()
   }, [page, update])
+
   if (last != null) {
     for (let i = 1; i <= last; i++) {
       pageNumbers.push(i)
     }
   }
 
-  // changed by me
-  //toggle ki jagah switch
   function onChange(checked) {
 
 
     setWN(!wn);
   }
-  //till here
 
 
   const responisve = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
+   
       breakpoint: { max: 4000, min: 3000 },
       items: 5,
     },
@@ -136,18 +86,8 @@ const Codechef = () => {
     color: '#fff',
     lineHeight: '160px',
     textAlign: 'center',
-    background: '#364d79',
-    // width: 150,
+    background: '#364d79'
   };
-
-
- 
-
-
-
-
-
-
 
 
   return (
@@ -171,7 +111,7 @@ const Codechef = () => {
           {conData.length > 0 ? (
             <>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <img style={{ width: '220px', height: '55px' }} src = {logo} />
+                <img style={{ width: '220px', height: '55px', background: "white" }} src = {logo} />
                 <div style={{ display: 'flex', float: 'right' }}>
                   <div style={{ float: 'right', borderRadius: '5px' }}>
                     <h6
@@ -219,17 +159,8 @@ const Codechef = () => {
                       <>
                         <Row gutter={[16,10]} className="contestRow">
                           <Col span = {5} >
-                            <div style={{ color: "white"}} className="contestName">
-                              <h6 
-                              style=
-                              { {background: "none",
-                               color: "black",
-                               fontSize: "0.9rem"
-                               
-                               }}
-                                >{res.name}</h6>
-
-                            </div>
+                            
+                            <CommonCard name = {res.name}/>
                           </Col>
                           <Col span = {19} >
 
@@ -241,45 +172,9 @@ const Codechef = () => {
                                     return (
                                       <Col span={19}>
                                         <div className="solved">
-                                          <a href={prob.url} target="_blank">
-                                            
-                                            <h7 style = { {background : "none", color: "white"}}>
-                                              {prob.index}-{prob.name}
-                                            </h7>
-                                          </a>
-                                          <br></br>
 
-                                          <Popover style={{color: " white"}} content={<div>
-                                            <div className="tagsbox">
-                                             
-                                              {
-                                                prob.tags.substr(
-                                                  2,
-                                                  prob.tags.length - 1
-                                                )}
-                                            </div>
-                                          </div>
-
-
-                                          } >
-                                            <img
-                                              style={{
-                                                width: '25px',
-                                                height: '15px',
-                                                float: 'right',
-                                                background: "none",
-                                                // position="right",
-                                                marginTop: '14px',
-                                              }}
-                                              src={Tags}
-                                            ></img> 
-
-
-                                           </Popover>
-
-
-                                          <h7 style = {{background: "none"}} className="green">SOLVED</h7>
-                                        </div>
+                                            <CommonQues index = { prob.index} name = {prob.name} className = "green" tags = {prob.tags}  status = "SOLVED"/>
+                                        </div> 
                                       </Col>
                                     )
                                   }
@@ -288,39 +183,9 @@ const Codechef = () => {
                                     <Col span={19}>
                                       {' '}
                                       <div className="wrong">
-                                        <a href={prob.url} target="_blank">
-                                          <h7 style = {{background: "none"}}>
-                                            {prob.index}-{prob.name}
-                                          </h7>
-                                        </a>
-                                        <br></br>
-                                         <Popover content={<div>
-                                            <div className="tagsbox">
-                                              
-                                              {
-                                                prob.tags.substr(
-                                                  2,
-                                                  prob.tags.length - 1
-                                                )}
-                                            </div>
-                                          </div>
 
+                                          <CommonQues index = { prob.index} name = {prob.name} className = "red" tags = {prob.tags}  status = "WRONG"/>
 
-                                          } >
-                                            <img
-                                              style={{
-                                                width: '25px',
-                                                height: '15px',
-                                                float: 'right',
-                                                // position="right",
-                                                marginTop: '14px',
-                                              }}
-                                              src={Tags}
-                                            ></img> 
-
-
-                                           </Popover>
-                                        <h7 style = {{background: "none"}} className="red">WRONG</h7>
                                       </div>
                                     </Col>
                                   )
@@ -329,39 +194,7 @@ const Codechef = () => {
                                     return (
                                       <Col span={19}>
                                         <div className="upsolved">
-                                          <a href={prob.url} target="_blank">
-                                            <h7 style = {{background: "none"}}>
-                                              {prob.index}-{prob.name}
-                                            </h7>
-                                          </a>
-                                          <br></br>
-                                          <Popover content={<div>
-                                            <div className="tagsbox">
-                                             
-                                              {
-                                                prob.tags.substr(
-                                                  2,
-                                                  prob.tags.length - 1
-                                                )}
-                                            </div>
-                                          </div>
-
-
-                                          } >
-                                            <img
-                                              style={{
-                                                width: '25px',
-                                                height: '15px',
-                                                float: 'right',
-                                                // position="right",
-                                                marginTop: '14px',
-                                              }}
-                                              src={Tags}
-                                            ></img> 
-
-
-                                           </Popover>
-                                          <h7 style = {{background: "none"}} className="blue">UPSOLVED</h7>
+                                        <CommonQues index = { prob.index} name = {prob.name} className ="blue" tags = {prob.tags}  status = "UNSOLVED"/>
                                         </div>
                                       </Col>
                                     )
@@ -371,40 +204,8 @@ const Codechef = () => {
                                     <Col span={19}>
                                       {' '}
                                       <div className="not_attempted">
-                                        <a href={prob.url} target="_blank">
-                                          <h7 style = {{background: "none",  color: "white"}}>
-                                            {prob.index}-{prob.name}
-                                          </h7>
-                                        </a>
-                                        <br></br>
-                                        <Popover content={<div>
-                                            <div className="tagsbox">
-                                            
-                                              {
-                                                prob.tags.substr(
-                                                  2,
-                                                  prob.tags.length - 1
-                                                )}
-                                            </div>
-                                          </div>
-
-
-                                          } >
-                                            <img
-                                              style={{
-                                                width: '25px',
-                                                height: '15px',
-                                                float: 'right',
-                                                // position="right",
-                                                background: "none",
-                                                marginTop: '14px',
-                                              }}
-                                              src={Tags}
-                                            ></img> 
-
-
-                                           </Popover>
-                                        <h7 style = {{background: "none" }} className="viol">NOT ATTEMPTED</h7>
+                                     
+                                         <CommonQues index = { prob.index} name = {prob.name} className = "viol" tags = {prob.tags}  status = "NOT ATTEMPTED"/>
                                       </div>
                                     </Col>
                                   )

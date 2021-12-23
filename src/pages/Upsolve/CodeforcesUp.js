@@ -9,7 +9,10 @@ import logo from '../../assets/SitesImages/Codeforces/codeforces.png'
 import refresh from '../../assets/Upsolve/reload.png'
 import { Popover, Button } from 'antd';
 import { Switch } from 'antd';
-import { codeforces } from './upsolve.actions'
+import { codeforces } from '../../actions/upsolve.actions'
+import { CodeforcesAPI } from '../../actions/Upsolve';
+import CommonCard from './CommonContestCard';
+import CommonQues from './CommonQues';
 
 function Codeforces() {
   const pageNumbers = []
@@ -26,7 +29,7 @@ function Codeforces() {
   let [update, setUpdate] = useState(0)
 
   const [wn, setWN] = useState(false)
-  
+
 
   const width = { width: 200 }
 
@@ -38,51 +41,13 @@ function Codeforces() {
     setNext(null)
     //   setVir(vir);
     Validate()
-    async function fetchData() {
-      const creds = JSON.parse(localStorage.getItem('creds'))
-      const acc = creds.access
 
-      const response = await codeforces(acc, vir, page)
-      if (response.status == 200) {
-        const data = await response.json()
-        //console.log(data)
 
-        if (data.status === 'OK') {
-          if (data.result.length > 0) {
-            const newLinks = data.links
-            setFirst(newLinks.first.split('=')[1])
-            setLast(newLinks.last.split('=')[1])
-            if (newLinks.prev !== null) {
-              setPrev(newLinks.prev.split('=')[1])
-            }
-            if (newLinks.next !== null) {
-              setNext(newLinks.next.split('=')[1])
-            }
-            await setLast(data.meta.last_page)
-            setCurPage(data.meta.current_page)
-          } else if (vir == false) {
-            setVir(true)
-          } else {
-            localStorage.setItem(
-              'err',
-              'Codeforces upsolve is available when you participate in atleast one contest(official/virtual)'
-            )
-            window.location = '/home'
-          }
-         
-        }
+    CodeforcesAPI(setFirst, setLast,
+      page, vir, setVir,
+      setPrev,
+      setNext, setCurPage, setData, setLoader)
 
-        const result = await data.result
-        await setData(result)
-        setLoader(false)
-      } else {
-        setLoader(false)
-        localStorage.setItem('err', data.error)
-        window.location = '/home'
-      }
-      //setLoader(false);
-    }
-    fetchData()
   }, [page, vir, wn, update])
   if (last != null) {
     for (let i = 1; i <= last; i++) {
@@ -91,7 +56,6 @@ function Codeforces() {
   }
   const responisve = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 5,
     },
@@ -149,7 +113,7 @@ function Codeforces() {
         <div className="body">
           {conData.length > 0 ? (
             <>
-              <img style={{ width: '220px', height: '30px' }} src={logo} />
+              <img style={{ width: '220px', height: '30px', background: "white" }} src={logo} />
 
               <div style={{ display: 'flex', float: 'right' }}>
                 <div style={{ float: 'right', borderRadius: '5px' }}>
@@ -162,21 +126,6 @@ function Codeforces() {
 
                     <Switch style={{ backgroundcolor: "white" }} defaultUnChecked onChange={ChangePage} />
 
-
-
-                    {/* <ToggleButton
-                      inactiveLabel={''}
-                      activeLabel={''}
-                      value={vir || false}
-                      onToggle={async (val) => {
-                        await setVir(!vir)
-                        setTimeout(() => {
-                          setLoader(true)
-                        }, 1000)
-
-                        setPage(1)
-                      }}
-                    /> */}
                   </div>
                 </div>
                 <div style={{ float: 'right', borderRadius: '5px' }}>
@@ -186,14 +135,7 @@ function Codeforces() {
                     Only Wrong/Not Attempted
                   </h6>
                   <div style={{ display: 'block', marginLeft: '45px' }}>
-                    {/* <ToggleButton
-                      inactiveLabel={''}
-                      activeLabel={''}
-                      value={wn || false}
-                      onToggle={(val) => {
-                        setWN(!wn)
-                      }}
-                    /> */}
+
                     <Switch defaultUnChecked onChange={onChange} />
 
                   </div>
@@ -231,16 +173,8 @@ function Codeforces() {
                       <>
                         <Row gutter={[16, 10]} className="contestRow">
                           <Col span={5}>
-                            <div className="contestName">
-                              <h6
-                                style=
-                                {{
-                                  background: "none",
-                                  color: "black",
-                                  fontSize: "0.9rem"
 
-                                }}>{res.name}</h6>
-                            </div>
+                            <CommonCard name={res.name} />
                           </Col>
 
                           <Col span={19}>
@@ -251,44 +185,10 @@ function Codeforces() {
                                     return (
                                       <Col span={19}>
                                         <div className="solved">
-                                          <a href={prob.url} target="_blank">
 
-                                            <h7 style={{ background: "none", color: "white" }}>
-                                              {prob.index}-{prob.name}
-                                            </h7>
-                                          </a>
-                                          <br></br>
-
-                                          <Popover style={{ color: " white" }} content={<div>
-                                            <div className="tagsbox">
-                                              {console.log(prob.tags)};
-                                              {
-                                                prob.tags.substr(
-                                                  2,
-                                                  prob.tags.length - 1
-                                                )}
-                                            </div>
-                                          </div>
+                                          <CommonQues index={prob.index} name={prob.name} className = "green" tags={prob.tags} status="SOLVED" />
 
 
-                                          } >
-                                            <img
-                                              style={{
-                                                width: '25px',
-                                                height: '15px',
-                                                float: 'right',
-                                                background: "none",
-                                                // position="right",
-                                                marginTop: '14px',
-                                              }}
-                                              src={Tags}
-                                            ></img>
-
-
-                                          </Popover>
-
-
-                                          <h7 style={{ background: "none" }} className="green">SOLVED</h7>
                                         </div>
                                       </Col>
                                     )
@@ -298,39 +198,8 @@ function Codeforces() {
                                     <Col span={19}>
                                       {' '}
                                       <div className="wrong">
-                                        <a href={prob.url} target="_blank">
-                                          <h7 style={{ background: "none" }}>
-                                            {prob.index}-{prob.name}
-                                          </h7>
-                                        </a>
-                                        <br></br>
-                                        <Popover content={<div>
-                                          <div className="tagsbox">
-                                            {console.log(prob.tags)};
-                                            {
-                                              prob.tags.substr(
-                                                2,
-                                                prob.tags.length - 1
-                                              )}
-                                          </div>
-                                        </div>
-
-
-                                        } >
-                                          <img
-                                            style={{
-                                              width: '25px',
-                                              height: '15px',
-                                              float: 'right',
-                                              // position="right",
-                                              marginTop: '14px',
-                                            }}
-                                            src={Tags}
-                                          ></img>
-
-
-                                        </Popover>
-                                        <h7 style={{ background: "none" }} className="red">WRONG</h7>
+                                        
+                                        <CommonQues index={prob.index} name={prob.name} className = "red" tags={prob.tags} status="WRONG" />
                                       </div>
                                     </Col>
                                   )
@@ -339,39 +208,7 @@ function Codeforces() {
                                     return (
                                       <Col span={19}>
                                         <div className="upsolved">
-                                          <a href={prob.url} target="_blank">
-                                            <h7 style={{ background: "none" }}>
-                                              {prob.index}-{prob.name}
-                                            </h7>
-                                          </a>
-                                          <br></br>
-                                          <Popover content={<div>
-                                            <div className="tagsbox">
-                                              {console.log(prob.tags)};
-                                              {
-                                                prob.tags.substr(
-                                                  2,
-                                                  prob.tags.length - 1
-                                                )}
-                                            </div>
-                                          </div>
-
-
-                                          } >
-                                            <img
-                                              style={{
-                                                width: '25px',
-                                                height: '15px',
-                                                float: 'right',
-                                                // position="right",
-                                                marginTop: '14px',
-                                              }}
-                                              src={Tags}
-                                            ></img>
-
-
-                                          </Popover>
-                                          <h7 style={{ background: "none" }} className="blue">UPSOLVED</h7>
+                                          <CommonQues index={prob.index} name={prob.name} className = "blue" tags={prob.tags} status="UNSOLVED" />
                                         </div>
                                       </Col>
                                     )
@@ -381,40 +218,8 @@ function Codeforces() {
                                     <Col span={19}>
                                       {' '}
                                       <div className="not_attempted">
-                                        <a href={prob.url} target="_blank">
-                                          <h7 style={{ background: "none", color: "white" }}>
-                                            {prob.index}-{prob.name}
-                                          </h7>
-                                        </a>
-                                        <br></br>
-                                        <Popover content={<div>
-                                          <div className="tagsbox">
-                                            {console.log(prob.tags)};
-                                            {
-                                              prob.tags.substr(
-                                                2,
-                                                prob.tags.length - 1
-                                              )}
-                                          </div>
-                                        </div>
+                                        <CommonQues index={prob.index} name={prob.name} className = "viol" tags={prob.tags} status="NOT ATTEMPTED" />
 
-
-                                        } >
-                                          <img
-                                            style={{
-                                              width: '25px',
-                                              height: '15px',
-                                              float: 'right',
-                                              // position="right",
-                                              background: "none",
-                                              marginTop: '14px',
-                                            }}
-                                            src={Tags}
-                                          ></img>
-
-
-                                        </Popover>
-                                        <h7 style={{ background: "none" }} className="viol">NOT ATTEMPTED</h7>
                                       </div>
                                     </Col>
                                   )

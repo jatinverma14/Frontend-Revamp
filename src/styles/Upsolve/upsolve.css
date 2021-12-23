@@ -1,10 +1,6 @@
 *
 {
     background-color : rgb(2 4 29);
-    /* background: linear-gradient(black,); */
-    /* background-color: black; */
-    /* opacity: 0.8; */
-
     
 }
 
@@ -18,11 +14,9 @@
     padding-top: 10px;
     background: linear-gradient(180deg, #030321, #268c8c);
     width: 20rem;
-    /* border-left: 2px solid #030321; */
     box-shadow: 2px 2px 2px 3px black;
   }
   .wrong {
-    /* background-color: rgb(0, 0, 0); */
     background: linear-gradient(180deg, #030321, #268c8c);
 
     color: white;
@@ -34,12 +28,7 @@
     box-shadow: 2px 2px 2px 3px black;
   }
   .upsolved {
-    /* background-color: rgb(0, 0, 0); */
-    /* background: linear-gradient(red, yellow); */
     background: linear-gradient(180deg, #030321, #268c8c);
-    
-    /* background: linear-gradient(aqua, white); */
-    
     color: tomato;
     border-radius: 10px;
     height: 90px;
@@ -71,18 +60,14 @@
   .not_attempted {
    
     background: linear-gradient(180deg, #030321, #268c8c);
-    /* width: 100%; */
     width: 20rem;
     color: black;
     box-shadow: 2px 2px 2px 3px black;
-
-    /* color: orange; */
   
     border-radius: 10px;
     height: 90px;
     text-align: center;
     padding-top: 10px;
-    /* border-left: 2px solid #bba187; */
   }
   
   .contestRow {
@@ -246,7 +231,6 @@
   }
   .tagsbox {
     color: white;
-    /* background-color: beige; */
   }
   .active-page {
     background-color: rgb(0, 162, 255);
