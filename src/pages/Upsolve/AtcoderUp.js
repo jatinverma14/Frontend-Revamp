@@ -4,18 +4,18 @@ import { Row, Col } from 'antd';
 import Carousel from 'react-multi-carousel'
 import "react-multi-carousel/lib/styles.css";
 import '../../styles/Upsolve/upsolve.css'
-
 import logo from '../../assets/SitesImages/Atcoder/atcoder.png'
 import refresh from '../../assets/Upsolve/reload.png'
 import { Switch } from 'antd';
 import { AtcoderAPI } from '../../actions/Upsolve';
 import CommonCard from './CommonContestCard';
 import CommonQues from './CommonQues';
-
+import RESPONSIVE from '../../utils/Upsolveresponsive';
+import Toggle from './Toggle';
+import Pages from './Pages';
 
 const Atcoder = () => {
     const pageNumbers = []
-
     const [page, setPage] = useState(1)
     const [loader, setLoader] = useState(false)
     const [prev, setPrev] = useState(null)
@@ -34,38 +34,17 @@ const Atcoder = () => {
         setPage(page)
         setPrev(null)
         setNext(null)
-        
-        AtcoderAPI(setFirst,  setLast,
-            page,Prac,
+
+        AtcoderAPI(setFirst, setLast,
+            page, Prac,
             setPrev,
-            setNext,setCurPage,setData,setLoader)
+            setNext, setCurPage, setData, setLoader)
     }, [page, Prac, update])
     if (last != null) {
         for (let i = 1; i <= last; i++) {
             pageNumbers.push(i)
         }
-    }
-    const responisve = {
-        superLargeDesktop: {
-            // the naming can be any, depends on you.
-            breakpoint: { max: 4000, min: 3000 },
-            items: 5,
-        },
-        desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 3,
-        },
-        tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 2,
-        },
-        mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 1,
-        },
-    }
-
-
+    } 
     function ChangePage(checked) {
 
         (val) => {
@@ -73,31 +52,14 @@ const Atcoder = () => {
             setTimeout(() => {
                 setLoader(true)
             }, 1000)
-
+    
             setPage(1)
         }
     }
-
-
-    function onChange() {
-
-
-
-        setWN(!wn);
-    }
-
-
-
-
-
-
     return (
         <>
-            {/* <Navbar></Navbar>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br> */}
+            {/* <Navbar></Navbar> */}
+
             <br></br>
             {loader ? (
                 // <Spinner className="loading-animation" animation="border" />
@@ -106,64 +68,8 @@ const Atcoder = () => {
                 <div className="body">
                     {conData.length > 0 ? (
                         <>
-                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <div style={{ display: 'flex' }}>
-                                    <h3 textAlign="center">ATCODER</h3>
-                                    <img style={{ width: '60px', height: '50px', background: "white" }} src={logo} />
-                                </div>
-
-                                <div style={{ display: 'flex', float: 'right' }}>
-                                    <div style={{ float: 'right', borderRadius: '5px' }}>
-                                        <h6
-                                            style={{
-                                                fontSize: "0.8rem", paddingRight: "1rem",
-                                                padding: '3px',
-                                                color: 'white',
-                                                marginTop: '2px',
-                                            }}
-                                        >
-                                            Include Practice
-                                        </h6>
-                                        <div style={{ display: 'block', marginLeft: '25px' }}>
-                                            <Switch style={{ backgroundcolor: "white" }} defaultUnChecked onChange={ChangePage} />
-
-                                        </div>
-                                    </div>
-                                    <div style={{ float: 'right', borderRadius: '5px' }}>
-                                        <h6
-                                            style={{
-
-                                                padding: '3px',
-                                                fontSize: "0.8rem",
-                                                color: 'white',
-                                                marginTop: '2px',
-                                            }}
-                                        >
-                                            Only Wrong/Not Attempted
-                                        </h6>
-                                        <div style={{ display: 'block', marginLeft: '45px' }}>
-                                            <Switch defaultUnChecked onChange={onChange} />
-
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <button
-                                            title="solved? update"
-                                            style={{ float: 'right', borderRadius: '35px' }}
-                                            onClick={(e) => {
-                                                setUpdate(update + 1)
-                                            }}
-                                        >
-                                            <img
-                                                style={{ width: '50px', height: '52px' }}
-                                                src={refresh}
-                                            ></img>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br></br>
+                            <Toggle siteName = "AtCoder" logo = {logo} imgWidth = "fit-content" imgHeight = "50px" setUpdate = {setUpdate} refresh = {refresh} wn = {wn} setWN = {setWN}  ChangePage = {ChangePage}/>
+                            <br></br> 
 
                             {conData.map((res) => {
                                 return (
@@ -172,35 +78,18 @@ const Atcoder = () => {
                                             <>
                                                 <Row gutter={[16, 10]} className="contestRow">
                                                     <Col span={5}>
-                                                        <div style={{ width: "18rem" }} className="contestName">
-                                                            <h6
-                                                                style=
-                                                                {{
-                                                                    background: "none",
-                                                                    color: "black",
-                                                                    fontSize: "0.9rem"
 
-                                                                }}>{res.name}</h6>
-                                                        </div>
+                                                        <CommonCard name = {res.name}/>
                                                     </Col>
                                                     <Col span={19}>
-                                                        <Carousel responsive={responisve}>
+                                                        <Carousel responsive={RESPONSIVE}>
                                                             {res.problems.map((prob) => {
                                                                 if (prob.status === 'solved') {
                                                                     if (wn == false) {
                                                                         return (
                                                                             <Col span={19}>
                                                                                 <div className="solved">
-                                                                                    <a href={prob.url} target="_blank">
-
-                                                                                        <h7 style={{ background: "none", color: "white" }}>
-                                                                                            {prob.index}-{prob.name}
-                                                                                        </h7>
-                                                                                    </a>
-                                                                                    <br></br>
-
-
-                                                                                    <h7 style={{ background: "none" }} className="green">SOLVED</h7>
+                                                                                    <CommonQues platform="atcoder" url={prob.url} index={prob.index} name={prob.name} className="green" tags={prob.tags} status="SOLVED" />
                                                                                 </div>
                                                                             </Col>
                                                                         )
@@ -210,14 +99,9 @@ const Atcoder = () => {
                                                                         <Col span={19}>
                                                                             {' '}
                                                                             <div className="wrong">
-                                                                                <a href={prob.url} target="_blank">
-                                                                                    <h7 style={{ background: "none" }}>
-                                                                                        {prob.index}-{prob.name}
-                                                                                    </h7>
-                                                                                </a>
-                                                                                <br></br>
 
-                                                                                <h7 style={{ background: "none" }} className="red">WRONG</h7>
+                                                                                <CommonQues platform="atcoder" url={prob.url} index={prob.index} name={prob.name} className="red" tags={prob.tags} status="WRONG" />
+
                                                                             </div>
                                                                         </Col>
                                                                     )
@@ -226,14 +110,8 @@ const Atcoder = () => {
                                                                         return (
                                                                             <Col span={19}>
                                                                                 <div className="upsolved">
-                                                                                    <a href={prob.url} target="_blank">
-                                                                                        <h7 style={{ background: "none" }}>
-                                                                                            {prob.index}-{prob.name}
-                                                                                        </h7>
-                                                                                    </a>
-                                                                                    <br></br>
+                                                                                    <CommonQues platform="atcoder" url={prob.url} index={prob.index} name={prob.name} className="blue" tags={prob.tags} status="UNSOLVED" />
 
-                                                                                    <h7 style={{ background: "none" }} className="blue">UNSOLVED</h7>
                                                                                 </div>
                                                                             </Col>
                                                                         )
@@ -243,14 +121,8 @@ const Atcoder = () => {
                                                                         <Col span={19}>
                                                                             {' '}
                                                                             <div className="not_attempted">
-                                                                                <a href={prob.url} target="_blank">
-                                                                                    <h7 style={{ background: "none", color: "white" }}>
-                                                                                        {prob.index}-{prob.name}
-                                                                                    </h7>
-                                                                                </a>
-                                                                                <br></br>
+                                                                                <CommonQues platform="atcoder" url={prob.url} index={prob.index} name={prob.name} className="viol" tags={prob.tags} status="NOT ATTEMPTED" />
 
-                                                                                <h7 style={{ background: "none" }} className="viol">NOT ATTEMPTED</h7>
                                                                             </div>
                                                                         </Col>
                                                                     )
@@ -270,37 +142,7 @@ const Atcoder = () => {
                             <div className="paginate">
                                 <nav className="paginator">
                                     <ul className="pagination">
-                                        {page != 1 ? (
-                                            <a
-                                                style={{ padding: '15px' }}
-                                                onClick={() => {
-                                                    setTimeout(() => {
-                                                        setLoader(true)
-                                                    }, 1000)
-
-                                                    setPage(first)
-                                                }}
-                                                className="page-link"
-                                            >
-                                                First
-                                            </a>
-                                        ) : (
-                                            <></>
-                                        )}
-                                        {page != 1 ? (
-                                            <a
-                                                style={{ padding: '15px' }}
-                                                onClick={() => {
-                                                    setTimeout(() => {
-                                                        setLoader(true)
-                                                    }, 1000)
-                                                    setPage(prev)
-                                                }}
-                                                className="page-link"
-                                            >{`<`}</a>
-                                        ) : (
-                                            <></>
-                                        )}
+                                       {Pages(page, setLoader, setPage)}
                                         {pageNumbers.map((number) => (
                                             <li key={number} className="page-item">
                                                 <a

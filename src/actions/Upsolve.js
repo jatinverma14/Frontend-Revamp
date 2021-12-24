@@ -10,7 +10,6 @@ export async function CodechefAPI(setFirst, setLast,
     setNext, setCurPage, setData, setLoader) {
 
     const creds = JSON.parse(localStorage.getItem('creds'))
-    console.log(creds);
     const acc = creds.access
     const response = await codechef(acc, page)
     if (response.status === 200) {
@@ -61,7 +60,6 @@ export async function CodechefAPI(setFirst, setLast,
     }
 }
 
-
 export async function AtcoderAPI(setFirst, setLast,
     page, Prac,
     setPrev,
@@ -71,7 +69,6 @@ export async function AtcoderAPI(setFirst, setLast,
     const response = await atcoder(acc, page, Prac)
     if (response.status === 200) {
         const data = await response.json()
-        //  console.log(data);
         if (data.status === 'OK' && data.result.length > 0) {
 
             const newLinks = data.links
@@ -110,8 +107,6 @@ export async function AtcoderAPI(setFirst, setLast,
         }
     }
 }
-
-
 
 export async function CodeforcesAPI(setFirst, setLast,
     page, vir,setVir,

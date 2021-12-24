@@ -13,6 +13,9 @@ import { codeforces } from '../../actions/upsolve.actions'
 import { CodeforcesAPI } from '../../actions/Upsolve';
 import CommonCard from './CommonContestCard';
 import CommonQues from './CommonQues';
+import RESPONSIVE from '../../utils/Upsolveresponsive';
+import Toggle from './Toggle';
+import Pages from './Pages';
 
 function Codeforces() {
   const pageNumbers = []
@@ -39,7 +42,6 @@ function Codeforces() {
     setPage(page)
     setPrev(null)
     setNext(null)
-    //   setVir(vir);
     Validate()
 
 
@@ -54,26 +56,6 @@ function Codeforces() {
       pageNumbers.push(i)
     }
   }
-  const responisve = {
-    superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  }
-
-
 
   function ChangePage(checked) {
 
@@ -101,11 +83,7 @@ function Codeforces() {
   return (
     <>
       {/* <Navbar></Navbar> */}
-      {/* <br></br>
-      <br></br>
-      <br></br>
-      <br></br> */}
-      <br></br>
+
       {loader ? (
         // <Spinner className="loading-animation" animation="border" />
         <p>hello</p>
@@ -115,57 +93,8 @@ function Codeforces() {
             <>
               <img style={{ width: '220px', height: '30px', background: "white" }} src={logo} />
 
-              <div style={{ display: 'flex', float: 'right' }}>
-                <div style={{ float: 'right', borderRadius: '5px' }}>
-                  <h6
-                    style={{ padding: '3px', color: 'white', fontSize: "0.8rem", paddingRight: "1rem", marginTop: '2px' }}
-                  >
-                    Include Virtual{' '}
-                  </h6>
-                  <div style={{ display: 'block', marginLeft: '25px' }}>
-
-                    <Switch style={{ backgroundcolor: "white" }} defaultUnChecked onChange={ChangePage} />
-
-                  </div>
-                </div>
-                <div style={{ float: 'right', borderRadius: '5px' }}>
-                  <h6
-                    style={{ padding: '2px', color: 'white', fontSize: "0.8rem", marginTop: '2px' }}
-                  >
-                    Only Wrong/Not Attempted
-                  </h6>
-                  <div style={{ display: 'block', marginLeft: '45px' }}>
-
-                    <Switch defaultUnChecked onChange={onChange} />
-
-                  </div>
-                </div>
-
-                <div>
-                  <button
-                    title="solved? update"
-                    style={{
-                      float: 'right',
-                      borderRadius: '35px',
-                      marginTop: '2px',
-                    }}
-                    onClick={(e) => {
-                      setUpdate(update + 1)
-                    }}
-                  >
-                    <img
-                      style={{ width: '40px', height: '40px' }}
-                      src={refresh}
-                    ></img>
-                  </button>
-                </div>
-              </div>
-
+              <Toggle siteName="Codeforces" setUpdate={setUpdate} refresh={refresh} wn={wn} setWN={setWN} ChangePage={ChangePage} />
               <br></br>
-              <br></br>
-
-              <br></br>
-
               {conData.map((res) => {
                 return (
                   <>
@@ -178,17 +107,14 @@ function Codeforces() {
                           </Col>
 
                           <Col span={19}>
-                            <Carousel responsive={responisve}>
+                            <Carousel responsive={RESPONSIVE}>
                               {res.problems.map((prob) => {
                                 if (prob.status === 'solved') {
                                   if (wn == false) {
                                     return (
                                       <Col span={19}>
                                         <div className="solved">
-
-                                          <CommonQues  url = {prob.url} index={prob.index} name={prob.name} className = "green" tags={prob.tags} status="SOLVED" />
-
-
+                                          <CommonQues platform="Codeforces" url={prob.url} index={prob.index} name={prob.name} className="green" tags={prob.tags} status="SOLVED" />
                                         </div>
                                       </Col>
                                     )
@@ -198,8 +124,8 @@ function Codeforces() {
                                     <Col span={19}>
                                       {' '}
                                       <div className="wrong">
-                                        
-                                        <CommonQues  url = {prob.url} index={prob.index} name={prob.name} className = "red" tags={prob.tags} status="WRONG" />
+
+                                        <CommonQues platform="Codeforces" url={prob.url} index={prob.index} name={prob.name} className="red" tags={prob.tags} status="WRONG" />
                                       </div>
                                     </Col>
                                   )
@@ -208,7 +134,7 @@ function Codeforces() {
                                     return (
                                       <Col span={19}>
                                         <div className="upsolved">
-                                          <CommonQues index={prob.index} name={prob.name} className = "blue" tags={prob.tags} status="UNSOLVED" />
+                                          <CommonQues platform="Codeforces" index={prob.index} name={prob.name} className="blue" tags={prob.tags} status="UNSOLVED" />
                                         </div>
                                       </Col>
                                     )
@@ -218,7 +144,7 @@ function Codeforces() {
                                     <Col span={19}>
                                       {' '}
                                       <div className="not_attempted">
-                                        <CommonQues  url = {prob.url} index={prob.index} name={prob.name} className = "viol" tags={prob.tags} status="NOT ATTEMPTED" />
+                                        <CommonQues platform="Codeforces" url={prob.url} index={prob.index} name={prob.name} className="viol" tags={prob.tags} status="NOT ATTEMPTED" />
 
                                       </div>
                                     </Col>
@@ -239,37 +165,8 @@ function Codeforces() {
               <div className="paginate">
                 <nav className="paginator">
                   <ul className="pagination">
-                    {page != 1 ? (
-                      <a
-                        style={{ padding: '15px' }}
-                        onClick={() => {
-                          setPage(1)
-                          setTimeout(() => {
-                            setLoader(true)
-                          }, 1000)
-                        }}
-                        className="page-link"
-                      >
-                        First
-                      </a>
-                    ) : (
-                      <></>
-                    )}
-                    {page != 1 ? (
-                      <a
-                        style={{ padding: '15px' }}
-                        onClick={() => {
-                          setTimeout(() => {
-                            setLoader(true)
-                          }, 1000)
 
-                          setPage(prev)
-                        }}
-                        className="page-link"
-                      >{`<`}</a>
-                    ) : (
-                      <></>
-                    )}
+                    {Pages(page, setLoader, setPage)}
 
                     {pageNumbers.map((number) => (
                       <li key={number} className="page-item">
