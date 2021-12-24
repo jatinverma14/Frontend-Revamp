@@ -1,6 +1,5 @@
 import React from 'react'
 import { Popover, Button } from 'antd';
-
 import Tags from '../../assets/Upsolve/tags-icon2.png'
 
 export default function CommonQues(props) {
@@ -26,13 +25,7 @@ export default function CommonQues(props) {
             </div>
             } >
                 <img
-                    style={{
-                        width: '25px',
-                        height: '15px',
-                        float: 'right',
-                        background: "none",
-                        marginTop: '14px',
-                    }}
+                className='TagImage'
                     src={Tags}
                 ></img>
             </Popover>

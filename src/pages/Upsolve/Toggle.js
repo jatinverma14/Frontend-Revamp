@@ -1,54 +1,37 @@
 import React from 'react'
 import { Switch } from 'antd';
 
-export default function Toggle(props, setUpdate) {
+export default function Toggle(props) {
     return (
         <>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <div style={{ display: 'flex' }}>
-                    <h3 textAlign="center">{props.siteName}</h3>
+            <div className='Sitename' >
+                <divd>
+                    <h3 >{props.siteName}</h3>
                     <img style={{ width: props.imgWidth, height: props.imgHeight, background: "white" }} src={props.logo} />
-                </div>
+                </divd>
 
-                <div style={{ display: 'flex', float: 'right' }}>
-                    <div style={{ float: 'right', borderRadius: '5px' }}>
-                        <h6
-                            style={{
-                                fontSize: "0.8rem", paddingRight: "1rem",
-                                padding: '3px',
-                                color: 'white',
-                                marginTop: '2px',
-                            }}
-                        >
-                            Include Practice
-                        </h6>
-                        <div style={{ display: 'block', marginLeft: '25px' }}>
-                            <Switch style={{ backgroundcolor: "white" }} defaultUnChecked onChange={props.ChangePage} />
+                <div className='Right-Side'>
+                    <div >
+                        <h6>Include Practice </h6>
+                        <div>
+                            <Switch  defaultUnChecked onChange={props.ChangePage} />
 
                         </div>
                     </div>
-                    <div style={{ float: 'right', borderRadius: '5px' }}>
-                        <h6
-                            style={{
-
-                                padding: '3px',
-                                fontSize: "0.8rem",
-                                color: 'white',
-                                marginTop: '2px',
-                            }}
-                        >
+                    <div >
+                        <h6>
                             Only Wrong/Not Attempted
                         </h6>
-                        <div style={{ display: 'block', marginLeft: '45px' }}>
+                        <div>
                             <Switch defaultUnChecked onChange= {()=>{props.setWN(!props.wn);}} />
                         </div>
                     </div>
                     <div>
-                        <button
+                        <button className='btnUpdate'
                             title="solved? update"
-                            style={{ float: 'right', borderRadius: '35px' }}
+                            
                             onClick={(e) => {
-                                props.setUpdate(update + 1)
+                                props.setUpdate(props.update + 1)
                             }}
                         >
                             <img
