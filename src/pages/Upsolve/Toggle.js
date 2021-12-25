@@ -23,7 +23,7 @@ export default function Toggle(props) {
                             Only Wrong/Not Attempted
                         </h6>
                         <div>
-                            <Switch defaultUnChecked onChange= {()=>{props.setWN(!props.wn);}} />
+                            <Switch defaultUnChecked onChange= {()=>{props.setnotAttemptedToggle(!props.notAttemptedToggle);}} />
                         </div>
                     </div>
                     <div>
@@ -34,8 +34,7 @@ export default function Toggle(props) {
                                 props.setUpdate(props.update + 1)
                             }}
                         >
-                            <img
-                                style={{ width: '50px', height: '52px' }}
+                            <img className='refreshImg'
                                 src={props.refresh}
                             ></img>
                         </button>

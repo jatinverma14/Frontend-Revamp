@@ -9,7 +9,6 @@ import DIFFICULTY_OBJECT from '../../utils/StaticData'
 import { Button, Col, Switch, Input, Row } from 'antd'
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons'
 import ModalForDivision from './ModalForDivision'
-import 'antd/dist/antd.css'
 import '../../styles/Contests/contests.css'
 
 function ContestPage({ queryStr, ContestAPI }) {
@@ -17,9 +16,9 @@ function ContestPage({ queryStr, ContestAPI }) {
   const [datap, setDatap] = useState(queryStr.replace(/;/g, '&'))
 
   //for sidenav (for adding a class)
-  const [openSideNav, setOpenSideNav] = useState("");
+  const [openSideNav, setOpenSideNav] = useState('')
   //for blur bckground
-  const [blurBackground, setBlurBackground] = useState("");
+  const [blurBackground, setBlurBackground] = useState('')
 
   // search box
   const { Search } = Input
@@ -138,14 +137,14 @@ function ContestPage({ queryStr, ContestAPI }) {
 
   //opening filter block
   function openNav() {
-    setOpenSideNav('sideNavOpen');
-    setBlurBackground('blur_bckgrnd');
+    setOpenSideNav('sideNavOpen')
+    setBlurBackground('blur_bckgrnd')
   }
 
   //closing filter block
   function closeNav() {
-    setOpenSideNav("sideNavClose");
-    setBlurBackground(null);
+    setOpenSideNav('sideNavClose')
+    setBlurBackground(null)
   }
 
   //rendering contests
@@ -173,7 +172,7 @@ function ContestPage({ queryStr, ContestAPI }) {
   ) : (
     <>
       <div id="contest_nav_id">{/* <Navbar /> */}</div>
-      <h3 className={`page_heading ${blurBackground}`}  id="page_heading_id">
+      <h3 className={`page_heading ${blurBackground}`} id="page_heading_id">
         Contests
       </h3>
       <Button className="filter_buttonnn" type="primary" onClick={openNav}>
@@ -187,9 +186,9 @@ function ContestPage({ queryStr, ContestAPI }) {
         Refresh
       </Button>
 
-      <div id="mySidenav1" className = {`sidenav1 ${openSideNav}`}>
+      <div id="mySidenav1" className={`sidenav1 ${openSideNav}`}>
         {/* modal popup */}
-        <ModalForDivision 
+        <ModalForDivision
           difflev={DIFFICULTY_OBJECT.difficultyLevels}
           display={displayDiff}
           change={changeDifficultyFilter}
@@ -215,8 +214,14 @@ function ContestPage({ queryStr, ContestAPI }) {
           />
         </div>
         <br></br> <br></br>
-        <Button className="sidenav_apply_button" onClick={handleSubmit}> Apply </Button>
-        <Button className="sidenav_close_button" onClick={closeNav}> Close </Button>
+        <Button className="sidenav_apply_button" onClick={handleSubmit}>
+          {' '}
+          Apply{' '}
+        </Button>
+        <Button className="sidenav_close_button" onClick={closeNav}>
+          {' '}
+          Close{' '}
+        </Button>
       </div>
 
       {!problems.result ? (
@@ -224,29 +229,32 @@ function ContestPage({ queryStr, ContestAPI }) {
         <h1>hi</h1>
       ) : (
         <>
-          <div className={`contests_page ${blurBackground}`} id="contests_page_id">
+          <div
+            className={`contests_page ${blurBackground}`}
+            id="contests_page_id"
+          >
             <div className="roww">
               <div className="input-group">
-                <div>
-                  {/* search box */}
-                  <Search
-                    placeholder="input search text"
-                    allowClear
-                    enterButton="Search"
-                    size="large"
-                    onChange={(e) => setSearchText(e.target.value)}
-                    onSearch={handleSearch}
-                    className="search_box"
-                    style={{ borderRadius: 15 }}
-                  />
-                </div>
+                {/* search box */}
+                <Search
+                  placeholder="input search text"
+                  allowClear
+                  enterButton="Search"
+                  size="large"
+                  onChange={(e) => setSearchText(e.target.value)}
+                  onSearch={handleSearch}
+                  className="search_box"
+                />
               </div>
             </div>
             <Row gutter={[16, 16]}>
               {problems.result.map((playlist, i) => {
                 return (
                   <>
-                    <Col span={screen.width > 768 ? 12 : 25} style={{ marginBottom: '1rem' }} >
+                    <Col
+                      span={screen.width > 768 ? 12 : 25}
+                      style={{ marginBottom: '1rem' }}
+                    >
                       <AccordionCom problem={playlist} />
                     </Col>
                   </>

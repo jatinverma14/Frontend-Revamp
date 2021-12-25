@@ -13,7 +13,7 @@ export default function Lastpages(props) {
                                     props.setLoader(true)
                                 }, 1000)
 
-                                props.setPage(first)
+                                props.setPage(props.first)
                             }}
                             className="page-link"
                         >
@@ -29,7 +29,7 @@ export default function Lastpages(props) {
                                     props.setLoader(true)
                                 }, 1000)
 
-                                props.setPage(prev)
+                                props.setPage(props.prev)
                             }}
                             className="page-link"
                         >{`<`}</a>
@@ -62,8 +62,8 @@ export default function Lastpages(props) {
                                 setTimeout(() => {
                                     props.setLoader(true)
                                 }, 1000)
-                                props.setPage(next)
-                                props.setCurPage(next)
+                                props.setPage(props.next)
+                                props.setCurPage(props.next)
                             }}
                             className="page-link"
                         >{`>`}</a>

@@ -1,39 +1,39 @@
 import React, { useEffect, useState } from 'react'
 import Validate from './Validate'
-import '../../styles/Upsolve/upsolve.css'
-import logo from '../../assets/SitesImages/Atcoder/atcoder.png'
-import refresh from '../../assets/Upsolve/reload.png'
-import { AtcoderAPI } from '../../actions/Upsolve';
 import Toggle from './Toggle';
 import Carousel_Upsolve from './CarouselUpsolve';
 import Lastpages from './Lastpages';
+import { AtcoderAPI } from '../../actions/Upsolve';
+import '../../styles/Upsolve/upsolve.css'
+import logo from '../../assets/SitesImages/Atcoder/atcoder.png'
+import refresh from '../../assets/Upsolve/reload.png'
 
 const Atcoder = () => {
     const pageNumbers = []
-    const [page, setPage] = useState(1)
+    const [nextpage, setPage] = useState(1)
     const [loader, setLoader] = useState(false)
-    const [prev, setPrev] = useState(null)
+    const [prvPage, setprvPage] = useState(null)
     const [next, setNext] = useState(2)
-    const [first, setFirst] = useState(1)
+    const [firstPage, setFirst] = useState(1)
     const [last, setLast] = useState(null)
-    const [conData, setData] = useState([])
+    const [APIdata, setData] = useState([])
     const [Prac, setPrac] = useState(false)
-    const [wn, setWN] = useState(false)
+    const [notAttemptedToggle, setnotAttemptedToggle] = useState(false)
     let [update, setUpdate] = useState(0)
     const [curPage, setCurPage] = useState(1)
     useEffect(() => {
         Validate()
         setFirst(1)
         setLast(null)
-        setPage(page)
-        setPrev(null)
+        setPage(nextpage)
+        setprvPage(null)
         setNext(null)
 
         AtcoderAPI(setFirst, setLast,
-            page, Prac,
-            setPrev,
+            nextpage, Prac,
+            setprvPage,
             setNext, setCurPage, setData, setLoader)
-    }, [page, Prac, update])
+    }, [nextpage, Prac, update])
     if (last != null) {
         for (let i = 1; i <= last; i++) {
             pageNumbers.push(i)
@@ -54,24 +54,21 @@ const Atcoder = () => {
         <>
             {/* <Navbar></Navbar> */}
 
-            <br></br>
             {loader ? (
                 // <Spinner className="loading-animation" animation="border" />
-                <p>hello</p>
+                <p>Loading</p>
             ) : (
                 <div className="body">
-                    {conData.length > 0 ? (
+                    {APIdata.length > 0 ? (
                         <>
-                            <Toggle siteName="AtCoder" update = {update} logo={logo} imgWidth="fit-content" imgHeight="50px" setUpdate={setUpdate} refresh={refresh} wn={wn} setWN={setWN} ChangePage={ChangePage} />
-                            <br></br>
+                            <Toggle siteName="AtCoder" update = {update} logo={logo} imgWidth="fit-content" imgHeight="50px" setUpdate={setUpdate} refresh={refresh} notAttemptedToggle={notAttemptedToggle} setnotAttemptedToggle={setnotAttemptedToggle} ChangePage={ChangePage} />
 
-                            {conData.map((res) => {
+                            {APIdata.map((res) => {
                                 return (
                                     <>
                                         {res.problems.length > 0 ? (
                                             <>
-                                                <Carousel_Upsolve platform = "atcoder" name={res.name} problems={res.problems} wn={wn} />
-                                                <br></br>
+                                                <Carousel_Upsolve platform = "atcoder" name={res.name} problems={res.problems} notAttemptedToggle={notAttemptedToggle} />
                                             </>
                                         ) : (
                                             <></>
@@ -80,13 +77,13 @@ const Atcoder = () => {
                                 )
                             })}
                             <div className="paginate">
-                            <Lastpages page = {page} setLoader = {setLoader} pageNumbers = {pageNumbers} setPage = {setPage} setCurPage = {setCurPage} last = {last}/>
+                            <Lastpages page = {nextpage} prev = {prvPage} setLoader = {setLoader} first = {firstPage} next = {next} pageNumbers = {pageNumbers} setPage = {setPage} setCurPage = {setCurPage} last = {last}/>
                             </div>
 
                             {/* <Footer /> */}
                         </>
                     ) : (
-                        <p>hello</p>
+                        <p>Loading</p>
                         // <Loading />
                     )}
                 </div>

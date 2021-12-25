@@ -17,7 +17,7 @@ export default function Carousel_Upsolve(props) {
                     <Carousel responsive={RESPONSIVE}>
                         {props.problems.map((prob) => {
                             if (prob.status === 'solved') {
-                                if (props.wn == false) {
+                                if (props.notAttemptedToggle == false) {
                                     return (
                                         <Col span={19}>
                                             <div className="solved">
@@ -38,7 +38,7 @@ export default function Carousel_Upsolve(props) {
                                     </Col>
                                 )
                             } else if (prob.status === 'upsolved') {
-                                if (props.wn == false) {
+                                if (props.notAttemptedToggle == false) {
                                     return (
                                         <Col span={19}>
                                             <div className="upsolved">

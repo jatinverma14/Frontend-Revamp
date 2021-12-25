@@ -10,8 +10,8 @@ export async function CodechefAPI(setFirst, setLast,
     setNext, setCurPage, setData, setLoader) {
 
     const creds = JSON.parse(localStorage.getItem('creds'))
-    const acc = creds.access
-    const response = await codechef(acc, page)
+    const acessToken = creds.access
+    const response = await codechef(acessToken, page)
     if (response.status === 200) {
         const data = await response.json()
 
@@ -65,8 +65,8 @@ export async function AtcoderAPI(setFirst, setLast,
     setPrev,
     setNext, setCurPage, setData, setLoader) {
     const creds = JSON.parse(localStorage.getItem('creds'))
-    const acc = creds.access
-    const response = await atcoder(acc, page, Prac)
+    const acessToken = creds.access
+    const response = await atcoder(acessToken, page, Prac)
     if (response.status === 200) {
         const data = await response.json()
         if (data.status === 'OK' && data.result.length > 0) {
@@ -113,9 +113,9 @@ export async function CodeforcesAPI(setFirst, setLast,
     setPrev,
     setNext, setCurPage, setData ,setLoader) {
     const creds = JSON.parse(localStorage.getItem('creds'))
-    const acc = creds.access
+    const acessToken = creds.access
 
-    const response = await codeforces(acc, vir, page)
+    const response = await codeforces(acessToken, vir, page)
     if (response.status == 200) {
         const data = await response.json()
 
