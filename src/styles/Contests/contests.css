@@ -1,5 +1,5 @@
-.ant-layout-content{
-  background: linear-gradient(270deg,#0f1111,#121314);
+.ant-layout-content {
+  background: linear-gradient(270deg, #0f1111, #121314);
 }
 /* The side navigation menu */
 .sidenav1 {
@@ -199,15 +199,49 @@
   }
 }
 
-.ant-input-search .ant-input-group .ant-input-affix-wrapper:not(:last-child){border-radius: 17px 0px 0px 17px;}
-.ant-input-search > .ant-input-group > .ant-input-group-addon:last-child .ant-input-search-button {border-radius: 0px 17px 17px 0px;}
-.ant-input-search > .ant-input-group > .ant-input-group-addon:last-child {border-radius: 0px 17px 17px 0px;}
-.ant-input-suffix{display: none;}
+.ant-input-search .ant-input-group .ant-input-affix-wrapper:not(:last-child) {
+  border-radius: 17px 0px 0px 17px;
+}
+.ant-input-search
+  > .ant-input-group
+  > .ant-input-group-addon:last-child
+  .ant-input-search-button {
+  border-radius: 0px 17px 17px 0px;
+}
+.ant-input-search > .ant-input-group > .ant-input-group-addon:last-child {
+  border-radius: 0px 17px 17px 0px;
+}
+.ant-input-suffix {
+  display: none;
+}
 
 /* modal css */
-.ant-modal-header{background-color: #333534; color: #fff;border-radius: 15px 15px 0px 0px;}
-.ant-modal-content{background-color: #333534; color: #fff;border-radius: 15px;}
-.ant-modal-title,.ant-checkbox + span, .ant-modal-close-x{color: white;}
-.modal_diva_button{margin-left: 15px; border-radius: 15px;}
-.modal_set_button{border-radius: 15px; background-color: white; color: black; border-color: black;}
-.modal_set_button:hover{background-color: green; border-color: #0f1111;}
+.ant-modal-header {
+  background-color: #333534;
+  color: #fff;
+  border-radius: 15px 15px 0px 0px;
+}
+.ant-modal-content {
+  background-color: #333534;
+  color: #fff;
+  border-radius: 15px;
+}
+.ant-modal-title,
+.ant-checkbox + span,
+.ant-modal-close-x {
+  color: white;
+}
+.modal_diva_button {
+  margin-left: 15px;
+  border-radius: 15px;
+}
+.modal_set_button {
+  border-radius: 15px;
+  background-color: white;
+  color: black;
+  border-color: black;
+}
+.modal_set_button:hover {
+  background-color: green;
+  border-color: #0f1111;
+}
