@@ -1,95 +1,163 @@
-import React, { useState, useEffect } from 'react'
-import Validate from './Validate'
-import Toggle from './Toggle';
-import Carousel_Upsolve from './CarouselUpsolve';
-import Lastpages from './Lastpages';
-import { Spin, Alert } from 'antd';
-import { CodechefAPI } from '../../actions/Upsolve';
-import '../../styles/Upsolve/upsolve.css'
-import logo from '../../assets/SitesImages/Codechef/codechef-png.png'
-import refresh from '../../assets/Upsolve/reload.png'
+// import React, { useState, useEffect } from 'react'
+// import Validate from './Validate'
+// import Toggle from './Toggle'
+// import Carousel_Upsolve from './CarouselUpsolve'
+// import Lastpages from './Lastpages'
+// import { Spin, Alert } from 'antd'
+// // import { CodechefAPI } from '../../actions/Upsolve'
+// import  APIData  from '../../actions/Upsolve'
+import { codechef } from '../../actions/upsolve.actions'
+// import logo from '../../assets/SitesImages/Codechef/codechef-png.png'
+// import refresh from '../../assets/Upsolve/reload.png'
+// import '../../styles/Upsolve/upsolve.css'
 
-const Codechef = () => {
-  let [update, setUpdate] = useState(0)
-  const [notAttemptedToggle, setnotAttemptedToggle] = useState(false)
-  const pageNumbers = []
-  const [nextpage, setPage] = useState(1)
-  const [loader, setLoader] = useState(false)
-  const [prvPage, setprvPage] = useState(null)
-  const [next, setNext] = useState(2)
-  const [firstPage, setFirst] = useState(1)
-  const [last, setLast] = useState(null)
-  const [APIdata, setData] = useState([])
-  const [curPage, setCurPage] = useState(1)
+// const Codechef = () => {
+//   let [update, setUpdate] = useState(0)
+//   const [notAttemptedToggle, setnotAttemptedToggle] = useState(false)
+//   const pageNumbers = []
+//   const [nextpage, setnextPage] = useState(1)
+//   const [loader, setLoader] = useState(false)
+//   const [previousPage, setpreviousPage] = useState(null)
+//   const [next, setNext] = useState(2)
+//   const [firstPage, setFirstPage] = useState(1)
+//   const [lastPage, setLastpage] = useState(null)
+//   const [APIdata, setData] = useState([])
+//   const [currentPage, setcurrentPage] = useState(1)
+//   const [virtualPracticeToggle, setvirtualPracticeToggle] = useState(false)
+//   const [PracticeToggle, setPracticeToggle] = useState(false)
 
-  useEffect(() => {
-    setFirst(null)
-    setLast(null)
-    setPage(nextpage)
-    setprvPage(null)
-    setNext(null)
-    Validate()
 
-    // calling fetchApi function
-    CodechefAPI(setFirst, setLast,
-      nextpage,
-      setprvPage,
-      setNext, setCurPage, setData, setLoader)
-  }, [nextpage, update])
+//   useEffect(() => {
+//     setFirstPage(null)
+//     setLastpage(null)
+//     setnextPage(nextpage)
+//     setpreviousPage(null)
+//     setNext(null)
+//     Validate()
 
-  if (last != null) {
-    for (let i = 1; i <= last; i++) {
-      pageNumbers.push(i)
-    }
-  }       
+//     // CodechefAPI(
+//     //   setFirstPage,
+//     //   setLastpage,
+//     //   nextpage,
+//     //   setpreviousPage,
+//     //   setNext,
+//     //   setcurrentPage,
+//     //   setData,
+//     //   setLoader
+//     // )
+//     // APIData("simpleData",setFirstPage,
+//     //   setLastpage,
+//     //   nextpage,
+//     //   setpreviousPage,
+//     //   setNext,
+//     //   setcurrentPage,
+//     //   setData,
+//     //   setLoader,codechef)
 
+//     APIData("simpleData",setFirstPage,
+//       setLastpage,
+//       nextpage,
+//       setpreviousPage,
+//       setNext,
+//       setcurrentPage,
+//       setData,
+//       setLoader,"codechef", PracticeToggle,virtualPracticeToggle,
+//       setvirtualPracticeToggle)
+
+//   }, [nextpage, virtualPracticeToggle, notAttemptedToggle,update])
+
+//   if (lastPage != null) {
+//     for (let i = 1; i <= lastPage; i++) {
+//       pageNumbers.push(i)
+//     }
+//   }
+
+//   return (
+//     <>
+//       {/* <Navbar /> */}
+
+//       {loader ? (
+//         // <Spinner className="loading-animation" animation="border" />
+//         <Spin tip="Loading...">
+//           <Alert
+//             message="Alert message title"
+//             description="Further details about the context of this alert."
+//             type="info"
+//           />
+//         </Spin>
+//       ) : (
+//         <div className="body">
+//           {APIdata.length > 0 ? (
+//             <>
+//               <Toggle
+//                 siteName="AtCoder"
+//                 update={update}
+//                 platform = "codechef"
+//                 logo={logo}
+//                 imgWidth="220px"
+//                 imgHeight="55px"
+//                 setUpdate={setUpdate}
+//                 refresh={refresh}
+//                 notAttemptedToggle={notAttemptedToggle}
+//                 setnotAttemptedToggle={setnotAttemptedToggle}
+//               />
+//               {APIdata.map((res) => {
+//                 return (
+//                   <>
+//                     {res.problems.length > 0 ? (
+//                       <>
+//                         <Carousel_Upsolve
+//                           platform="codechef"
+//                           name={res.name}
+//                           problems={res.problems}
+//                           notAttemptedToggle={notAttemptedToggle}
+//                         />
+//                       </>
+//                     ) : (
+//                       <></>
+//                     )}
+//                   </>
+//                 )
+//               })}
+
+//               <div className="paginate">
+//                 <Lastpages
+//                   page={nextpage}
+//                   setLoader={setLoader}
+//                   pageNumbers={pageNumbers}
+//                   prev={previousPage}
+//                   first={firstPage}
+//                   setnextPage={setnextPage}
+//                   setcurrentPage={setcurrentPage}
+//                   next={next}
+//                   lastPage={lastPage}
+//                 />
+//               </div>
+//               {/* <Footer /> */}
+//             </>
+//           ) : (
+//             // <Loading />
+//             <p>Loading</p>
+//           )}
+//         </div>
+//       )}
+//     </>
+//   )
+// }
+// export default Codechef
+
+import React from 'react'
+import mainUpsolve from "./mainUpsolve";
+
+ function CodechefUp() {
+    
   return (
     <>
-      {/* <Navbar /> */}
-      
-      {loader ? (
-        // <Spinner className="loading-animation" animation="border" />
-        <Spin tip="Loading...">
-          <Alert
-            message="Alert message title"
-            description="Further details about the context of this alert."
-            type="info"
-          />
-        </Spin>
-      ) : (
-        <div className="body">
-          {APIdata.length > 0 ? (
-            <>
-              <Toggle siteName="AtCoder" update = {update} logo={logo} imgWidth="220px" imgHeight="55px" setUpdate={setUpdate} refresh={refresh} notAttemptedToggle={notAttemptedToggle} setnotAttemptedToggle={setnotAttemptedToggle} />
-              {APIdata.map((res) => {
-                return (
-                  <>
-                    {res.problems.length > 0 ? (
-                      <>
-                        <Carousel_Upsolve platform = "codechef" name = {res.name} problems = {res.problems} notAttemptedToggle = {notAttemptedToggle}  />
-                      
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                  </>
-                )
-              })}
+      {mainUpsolve("simpleData", codechef, "codechef")}
 
-              <div className="paginate">
-              <Lastpages page = {nextpage} setLoader = {setLoader} pageNumbers = {pageNumbers} prev = {prvPage} first = {firstPage} setPage = {setPage} setCurPage = {setCurPage} next = {next} last = {last}/>
-              </div>
-              {/* <Footer /> */}
-            </>
-          ) : (
-            // <Loading />
-            <p>Loading</p>
-
-          )
-          }
-        </div >
-      )}
     </>
   )
 }
-export default Codechef
+
+export default CodechefUp
+

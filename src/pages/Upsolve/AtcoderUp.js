@@ -1,94 +1,160 @@
-import React, { useEffect, useState } from 'react'
-import Validate from './Validate'
-import Toggle from './Toggle';
-import Carousel_Upsolve from './CarouselUpsolve';
-import Lastpages from './Lastpages';
-import { AtcoderAPI } from '../../actions/Upsolve';
-import '../../styles/Upsolve/upsolve.css'
-import logo from '../../assets/SitesImages/Atcoder/atcoder.png'
-import refresh from '../../assets/Upsolve/reload.png'
+// import React, { useEffect, useState } from 'react'
+// import Validate from './Validate'
+// import Toggle from './Toggle'
+// import Carousel_Upsolve from './CarouselUpsolve'
+// import Lastpages from './Lastpages'
+// import  APIData  from '../../actions/Upsolve'
+// import logo from '../../assets/SitesImages/Atcoder/atcoder.png'
+// // import { AtcoderAPI } from '../../actions/Upsolve'
+import {atcoder} from '../../actions/upsolve.actions'
+// import refresh from '../../assets/Upsolve/reload.png'
+// import '../../styles/Upsolve/upsolve.css'
 
-const Atcoder = () => {
-    const pageNumbers = []
-    const [nextpage, setPage] = useState(1)
-    const [loader, setLoader] = useState(false)
-    const [prvPage, setprvPage] = useState(null)
-    const [next, setNext] = useState(2)
-    const [firstPage, setFirst] = useState(1)
-    const [last, setLast] = useState(null)
-    const [APIdata, setData] = useState([])
-    const [Prac, setPrac] = useState(false)
-    const [notAttemptedToggle, setnotAttemptedToggle] = useState(false)
-    let [update, setUpdate] = useState(0)
-    const [curPage, setCurPage] = useState(1)
-    useEffect(() => {
-        Validate()
-        setFirst(1)
-        setLast(null)
-        setPage(nextpage)
-        setprvPage(null)
-        setNext(null)
+// const Atcoder = () => {
+//   const pageNumbers = []
+//   const [nextpage, setnextPage] = useState(1)
+//   const [loader, setLoader] = useState(false)
+//   const [previousPage, setpreviousPage] = useState(null)
+//   const [next, setNext] = useState(2)
+//   const [firstPage, setFirstPage] = useState(1)
+//   const [last, setLastpage] = useState(null)
+//   const [APIdata, setData] = useState([])
+//   const [PracticeToggle, setPracticeToggle] = useState(false)
+//   const [notAttemptedToggle, setnotAttemptedToggle] = useState(false)
+//   let [update, setUpdate] = useState(0)
+//   const [currentPage, setcurrentPage] = useState(1)
+//   useEffect(() => {
+//     Validate()
+//     setFirstPage(1)
+//     setLastpage(null)
+//     setnextPage(nextpage)
+//     setpreviousPage(null)
+//     setNext(null)
 
-        AtcoderAPI(setFirst, setLast,
-            nextpage, Prac,
-            setprvPage,
-            setNext, setCurPage, setData, setLoader)
-    }, [nextpage, Prac, update])
-    if (last != null) {
-        for (let i = 1; i <= last; i++) {
-            pageNumbers.push(i)
-        }
-    }
-    function ChangePage(checked) {
+//     // AtcoderAPI(
+//     //   setFirstPage,
+//     //   setLastpage,
+//     //   nextpage,
+//     //   PracticeToggle,
+//     //   setpreviousPage,
+//     //   setNext,
+//     //   setcurrentPage,
+//     //   setData,
+//     //   setLoader
+//     // )
+//     APIData("PracticeData",setFirstPage,
+//       setLastpage,
+//       nextpage,
+//       setpreviousPage,
+//       setNext,
+//       setcurrentPage,
+//       setData,
+//       setLoader,"atcoder",PracticeToggle)
 
-        (val) => {
-            setPrac(!Prac)
-            setTimeout(() => {
-                setLoader(true)
-            }, 1000)
 
-            setPage(1)
-        }
-    }
-    return (
-        <>
-            {/* <Navbar></Navbar> */}
+//   }, [nextpage, PracticeToggle, update])
+//   if (last != null) {
+//     for (let i = 1; i <= last; i++) {
+//       pageNumbers.push(i)
+//     }
+//   }
+//   // function ChangePage(checked,PracticeToggle,setPracticeToggle) {
+//   //   (val) => {
+//   //     setPracticeToggle(!PracticeToggle)
+//   //     console.log("func runned asshole")
+//   //     setTimeout(() => {
+//   //       setLoader(true)
+//   //     }, 1000)
 
-            {loader ? (
-                // <Spinner className="loading-animation" animation="border" />
-                <p>Loading</p>
-            ) : (
-                <div className="body">
-                    {APIdata.length > 0 ? (
-                        <>
-                            <Toggle siteName="AtCoder" update = {update} logo={logo} imgWidth="fit-content" imgHeight="50px" setUpdate={setUpdate} refresh={refresh} notAttemptedToggle={notAttemptedToggle} setnotAttemptedToggle={setnotAttemptedToggle} ChangePage={ChangePage} />
+//   //     setnextPage(1)
+//   //   }
+//   // }
+//   return (
+//     <>
+//       {/* <Navbar></Navbar> */}
 
-                            {APIdata.map((res) => {
-                                return (
-                                    <>
-                                        {res.problems.length > 0 ? (
-                                            <>
-                                                <Carousel_Upsolve platform = "atcoder" name={res.name} problems={res.problems} notAttemptedToggle={notAttemptedToggle} />
-                                            </>
-                                        ) : (
-                                            <></>
-                                        )}
-                                    </>
-                                )
-                            })}
-                            <div className="paginate">
-                            <Lastpages page = {nextpage} prev = {prvPage} setLoader = {setLoader} first = {firstPage} next = {next} pageNumbers = {pageNumbers} setPage = {setPage} setCurPage = {setCurPage} last = {last}/>
-                            </div>
+//       {loader ? (
+//         // <Spinner className="loading-animation" animation="border" />
+//         <p>Loading</p>
+//       ) : (
+//         <div className="body">
+//           {APIdata.length > 0 ? (
+//             <>
+//               <Toggle
+//                 siteName="AtCoder"
+//                 update={update}
+//                 platform = "atcoder"
+//                 logo={logo}
+//                 imgWidth="fit-content"
+//                 imgHeight="50px"
+//                 setUpdate={setUpdate}
+//                 refresh={refresh}
+//                 notAttemptedToggle={notAttemptedToggle}
+//                 setnotAttemptedToggle={setnotAttemptedToggle}
+//                 // ChangePage={ChangePage}
+//                 PracticeToggle = {PracticeToggle}
+//                 setPracticeToggle = {setPracticeToggle}
+//                 setLoader = {setLoader}
+//                 setnextPage = {setnextPage}
+//               />
 
-                            {/* <Footer /> */}
-                        </>
-                    ) : (
-                        <p>Loading</p>
-                        // <Loading />
-                    )}
-                </div>
-            )}
-        </>
-    )
+//               {APIdata.map((res) => {
+//                 return (
+//                   <>
+//                     {res.problems.length > 0 ? (
+//                       <>
+//                         <Carousel_Upsolve
+//                           platform="atcoder"
+//                           name={res.name}
+//                           problems={res.problems}
+//                           notAttemptedToggle={notAttemptedToggle}
+//                         />
+//                       </>
+//                     ) : (
+//                       <></>
+//                     )}
+//                   </>
+//                 )
+//               })}
+//               <div className="paginate">
+//                 <Lastpages
+//                   page={nextpage}
+//                   prev={previousPage}
+//                   setLoader={setLoader}
+//                   first={firstPage}
+//                   next={next}
+//                   pageNumbers={pageNumbers}
+//                   setnextPage={setnextPage}
+//                   setcurrentPage={setcurrentPage}
+//                   last={last}
+//                 />
+//               </div>
+
+//               {/* <Footer /> */}
+//             </>
+//           ) : (
+//             <p>Loading</p>
+//             // <Loading />
+//           )}
+//         </div>
+//       )}
+//     </>
+//   )
+// }
+// export default Atcoder
+
+
+import React from 'react'
+import mainUpsolve from "./mainUpsolve";
+
+ function AtcoderUp() {
+    
+  return (
+    <>
+      {mainUpsolve("PraciceData", "atcoder", "atcoder")}
+    </>
+  )
 }
-export default Atcoder
+
+export default AtcoderUp
+
