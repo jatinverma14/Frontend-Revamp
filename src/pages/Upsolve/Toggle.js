@@ -1,7 +1,5 @@
 import React from 'react'
-import { Switch } from 'antd'
-// import '../../styles/Upsolve/upsolve.css'
-
+import { Switch } from 'antd';
 
 export default function Toggle(props) {
   return (
@@ -23,15 +21,11 @@ export default function Toggle(props) {
           <div className = {(props.siteName !== "codechef")? "Toggle": "noDisplay"}>
             <h6>Include Practice </h6>
             <div>
-              {/* <Switch defaultUnChecked onChange={props.ChangePage} /> */}
-              <Switch defaultUnChecked onChange={()=>{
+              <Switch defaultUnChecked onChange = {(val)=>{
                 props.setPracticeToggle(!props.PracticeToggle)
-              
-                setTimeout(() => {
-                  props.setLoader(true)
-                }, 1000)
+                props.setvirtualPracticeToggle(!props.virtualPracticeToggle)
                 props.setnextPage(1)
-              }} />
+              }}  />
             </div>
           </div>
           <div >

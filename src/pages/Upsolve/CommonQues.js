@@ -12,10 +12,10 @@ export default function CommonQues(props) {
           </h7>
         </a>
       </div>
-      {props.platform != 'atcoder' ? (
+      {props.sitename !== 'atcoder' ? (
         <Popover
           content={
-            <div>
+            <div> 
               <div className="tagsbox">
                 {props.tags.substr(2, props.tags.length - 1)}
               </div>

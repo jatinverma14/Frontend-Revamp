@@ -4,17 +4,12 @@ import Toggle from './Toggle'
 import Carousel_Upsolve from './CarouselUpsolve'
 import Lastpages from './Lastpages'
 import { Spin, Alert } from 'antd'
-// import { CodechefAPI } from '../../actions/Upsolve'
-import { codechef } from '../../actions/upsolve.actions'
-import { codeforces } from '../../actions/upsolve.actions'
-import {atcoder} from '../../actions/upsolve.actions'
-import  APIData  from '../../actions/Upsolve'
+import  APIData  from '../../helpers/Upsolve/Upsolve'
 import logo from '../../assets/SitesImages/Codechef/codechef-png.png'
 import refresh from '../../assets/Upsolve/reload.png'
 import '../../styles/Upsolve/upsolve.css'
 
 const mainUpsolve = (requiredData,platform,siteName) => {
-  let [update, setUpdate] = useState(0)
   const [notAttemptedToggle, setnotAttemptedToggle] = useState(false)
   const pageNumbers = []
   const [nextpage, setnextPage] = useState(1)
@@ -24,13 +19,13 @@ const mainUpsolve = (requiredData,platform,siteName) => {
   const [firstPage, setFirstPage] = useState(1)
   const [lastPage, setLastpage] = useState(null)
   const [APIdata, setData] = useState([])
-
-
+ 
   const [virtualPracticeToggle, setvirtualPracticeToggle] = useState(false)
   const [PracticeToggle, setPracticeToggle] = useState(false)
-
+  
   const [currentPage, setcurrentPage] = useState(1)
-
+  let [update, setUpdate] = useState(0)
+  
   useEffect(() => {
     setFirstPage(null)
     setLastpage(null)
@@ -39,30 +34,15 @@ const mainUpsolve = (requiredData,platform,siteName) => {
     setNext(null)
     Validate()
 
-    // CodechefAPI(
-    //   setFirstPage,
-    //   setLastpage,
-    //   nextpage,
-    //   setpreviousPage,
-    //   setNext,
-    //   setcurrentPage,
-    //   setData,
-    //   setLoader
-    // )
-    // if (required === "SimpleData") {
-        APIData(requiredData,setFirstPage,
+    APIData(requiredData,setFirstPage,
       setLastpage,
       nextpage,
       setpreviousPage,
       setNext,
       setcurrentPage,
       setData,
-      setLoader,platform, PracticeToggle,virtualPracticeToggle,
+      setLoader,platform, PracticeToggle,setPracticeToggle,virtualPracticeToggle,
       setvirtualPracticeToggle)
-    // }
-    // else if(required === "SimpleData")
-
-    
     
   },[nextpage, virtualPracticeToggle, notAttemptedToggle,PracticeToggle,update])
 
@@ -92,7 +72,6 @@ const mainUpsolve = (requiredData,platform,siteName) => {
               <Toggle
                 siteName= {siteName}
                 update={update}
-                // platform = {platform}
                 logo={logo}
                 imgWidth="220px"
                 imgHeight="55px"
@@ -100,6 +79,12 @@ const mainUpsolve = (requiredData,platform,siteName) => {
                 refresh={refresh}
                 notAttemptedToggle={notAttemptedToggle}
                 setnotAttemptedToggle={setnotAttemptedToggle}
+                setPracticeToggle = {setPracticeToggle}
+                PracticeToggle = {PracticeToggle}
+                setnextPage = {setnextPage}
+                setLoader = {setLoader}
+                setvirtualPracticeToggle = {setvirtualPracticeToggle}
+                virtualPracticeToggle = {virtualPracticeToggle}
               />
               {APIdata.map((res) => {
                 return (
@@ -107,7 +92,7 @@ const mainUpsolve = (requiredData,platform,siteName) => {
                     {res.problems.length > 0 ? (
                       <>
                         <Carousel_Upsolve
-                          platform=  {platform}
+                          sitename=  {siteName}
                           name={res.name}
                           problems={res.problems}
                           notAttemptedToggle={notAttemptedToggle}

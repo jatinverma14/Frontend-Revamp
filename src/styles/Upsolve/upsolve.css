@@ -1,4 +1,6 @@
-
+*{
+  box-sizing: border-box;
+}
 .ant-row {
   margin: 0;
 }
@@ -10,7 +12,10 @@
   padding-top: 10px;
   background: linear-gradient(180deg, #030321, #268c8c);
   width: 20rem;
+  min-width: fit-content;
   box-shadow: 2px 2px 2px 3px black;
+  overflow: auto;
+
 }
 .wrong {
   background: linear-gradient(180deg, #030321, #268c8c);
@@ -21,6 +26,8 @@
   text-align: center;
   padding-top: 10px;
   box-shadow: 2px 2px 2px 3px black;
+  min-width: fit-content;
+  overflow: auto;
 }
 .upsolved {
   background: linear-gradient(180deg, #030321, #268c8c);
@@ -32,6 +39,8 @@
   padding-top: 10px;
   box-shadow: 2px 2px 2px 3px black;
   border-left: 2px solid lightskyblue;
+  min-width: fit-content;
+  overflow: auto;
 }
 .contestName {
   font-weight: 900;
@@ -39,7 +48,6 @@
   font-size: larger;
   border-radius: 10px;
   background-color: #dcdcc5;
-  /* background: aqua; */
   height: 90px;
   text-align: center;
   padding-top: 10px;
@@ -49,6 +57,8 @@
   justify-content: center;
   width: 18rem;
   align-items: center;
+  overflow: auto;
+  z-index: 3;
 }
 .not_attempted {
   background: linear-gradient(180deg, #030321, #268c8c);
@@ -59,6 +69,9 @@
   height: 90px;
   text-align: center;
   padding-top: 10px;
+  min-width: fit-content;
+  overflow: auto;
+
 }
 
 .contestRow {
@@ -315,7 +328,12 @@ a {
 }
 .refreshImg {
   width: 50px;
-  height: 52px;
+  height: 48px;
+}
+.btnUpdate{
+  border: none;
+  height: 10%;
+  background: none;
 }
 
 .switch {

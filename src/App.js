@@ -10,9 +10,6 @@ import {
 import Homepage from './pages/Homepage'
 import Login from './pages/LogReg/Login'
 import Register from './pages/LogReg/Register'
-import CodeforcesUp from './pages/Upsolve/CodeforcesUp'
-import CodechefUp from './pages/Upsolve/CodechefUp'
-import AtcoderUp from './pages/Upsolve/AtcoderUp'
 import Parent from './pages/Ladders-Practice/Parent'
 import Profile from './pages/Profile/Profile'
 import FillInfo from './pages/LogReg/FillInfo'
@@ -34,6 +31,9 @@ import TermsAndConditions from './pages/ExtraInfo/TermsAndConditions'
 import Contests from '../src/pages/Contests/Contests'
 import { Layout, Menu } from 'antd'
 import ContestAPI from './actions/Contest'
+import mainUpsolve from './pages/Upsolve/mainUpsolve'
+import { atcoder, codechef, codeforces } from './actions/upsolve.actions'
+
 
 const { Header, Footer, Content } = Layout
 
@@ -135,11 +135,11 @@ const App = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 {/* Login/Registration */}
-                <Route path="/upsolve/codeforces" element={<CodeforcesUp />} />
+                <Route path="/upsolve/codeforces" element={mainUpsolve("virtualData",codeforces,"codeforces")} />
                 {/* Codeforces upsolve */}
-                <Route path="/upsolve/atcoder" element={<AtcoderUp />} />
+                <Route path="/upsolve/atcoder" element={mainUpsolve("PracticeData", atcoder, "atcoder")} />
                 {/* Atcoder Upsolve */}
-                <Route path="/upsolve/codechef" element={<CodechefUp />} />
+                <Route path="/upsolve/codechef" element={mainUpsolve("simpleData", codechef, "codechef")} />
                 {/* Codechef upsolve */}
                 <Route path="/" element={<Homepage />} /> {/* Homepage */}
                 <Route path="/profile" element={<Profile />} />
