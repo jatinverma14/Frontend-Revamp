@@ -33,6 +33,7 @@ import { Layout, Menu } from 'antd'
 import ContestAPI from './actions/Contest'
 import mainUpsolve from './pages/Upsolve/mainUpsolve'
 import { atcoder, codechef, codeforces } from './actions/upsolve.actions'
+import Navbar from './pages/Navbar'
 
 
 const { Header, Footer, Content } = Layout
@@ -116,7 +117,7 @@ const App = () => {
     <>
       <CredentialsContext.Provider value={{ creds, setCreds }}>
         <Layout>
-          <Header>
+          {/* <Header>
             <div className="logo" />
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
               {new Array(7).fill(null).map((_, index) => {
@@ -124,7 +125,9 @@ const App = () => {
                 return <Menu.Item key={key}>{`nav ${key}`}</Menu.Item>
               })}
             </Menu>
-          </Header>
+          </Header> */}
+
+          <Navbar/>
           <Content>
             <Router>
               <Routes>
