@@ -1,4 +1,4 @@
-*{
+* {
   box-sizing: border-box;
 }
 .ant-row {
@@ -15,7 +15,6 @@
   min-width: fit-content;
   box-shadow: 2px 2px 2px 3px black;
   overflow: auto;
-
 }
 .wrong {
   background: linear-gradient(180deg, #030321, #268c8c);
@@ -71,7 +70,6 @@
   padding-top: 10px;
   min-width: fit-content;
   overflow: auto;
-
 }
 
 .contestRow {
@@ -330,7 +328,7 @@ a {
   width: 50px;
   height: 48px;
 }
-.btnUpdate{
+.btnUpdate {
   border: none;
   height: 10%;
   background: none;

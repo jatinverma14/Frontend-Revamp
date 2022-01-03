@@ -1,5 +1,6 @@
-.ant-layout-content {
+.main_container {
   background: linear-gradient(270deg, #0f1111, #121314);
+  margin-top: -16px;
 }
 /* The side navigation menu */
 .sidenav1 {
@@ -152,13 +153,13 @@
 }
 
 .sideNavOpen {
-  /* border: 2px solid white; */
   border-radius: 6px;
   box-shadow: -4px -4px 10px #5842f2cf;
   width: 28rem;
   opacity: 1;
   padding-left: 30px;
   padding-right: 50px;
+  z-index: 100;
 }
 
 .sideNavClose {
@@ -199,37 +200,52 @@
   }
 }
 
-.ant-input-search .ant-input-group .ant-input-affix-wrapper:not(:last-child) {
-  border-radius: 17px 0px 0px 17px;
+.input-group
+  .ant-input-search
+  .ant-input-group
+  .ant-input-affix-wrapper:not(:last-child) {
+  border-radius: 34px 0px 0px 34px;
 }
-.ant-input-search
+
+.input-group
+  .ant-input-search
   > .ant-input-group
   > .ant-input-group-addon:last-child
   .ant-input-search-button {
-  border-radius: 0px 17px 17px 0px;
+  border-radius: 0px 34px 34px 0px;
+  margin-right: 0;
 }
-.ant-input-search > .ant-input-group > .ant-input-group-addon:last-child {
-  border-radius: 0px 17px 17px 0px;
+
+.input-group
+  .ant-input-search
+  > .ant-input-group
+  > .ant-input-group-addon:last-child {
+  border-radius: 0px 34px 34px 0px;
 }
-.ant-input-suffix {
+
+.input-group .ant-input-suffix {
   display: none;
 }
 
 /* modal css */
-.ant-modal-header {
+.modal .ant-modal-header {
   background-color: #333534;
   color: #fff;
   border-radius: 15px 15px 0px 0px;
 }
-.ant-modal-content {
+.modal .ant-modal-content {
   background-color: #333534;
   color: #fff;
   border-radius: 15px;
 }
-.ant-modal-title,
-.ant-checkbox + span,
-.ant-modal-close-x {
+.modal .ant-modal-title,
+.modal .ant-checkbox + span,
+.modal .ant-modal-close-x {
   color: white;
+}
+.modal .ant-modal-close-x:hover {
+  background-color: #333534;
+  height: 1px;
 }
 .modal_diva_button {
   margin-left: 15px;

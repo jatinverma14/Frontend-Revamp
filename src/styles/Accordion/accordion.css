@@ -1,6 +1,7 @@
 .mainCard {
   border-radius: 10px;
   border-left: 12px solid #e0e0e0;
+  /* background-color: #e0e0e0; */
 }
 
 @media screen and (max-width: 768px) {
