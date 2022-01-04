@@ -35,7 +35,6 @@ import mainUpsolve from './pages/Upsolve/mainUpsolve'
 import { atcoder, codechef, codeforces } from './actions/upsolve.actions'
 import Navbar from './pages/Navbar'
 
-
 const { Header, Footer, Content } = Layout
 
 //react context
@@ -127,7 +126,7 @@ const App = () => {
             </Menu>
           </Header> */}
 
-          <Navbar/>
+          <Navbar />
           <Content>
             <Router>
               <Routes>
@@ -138,11 +137,20 @@ const App = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 {/* Login/Registration */}
-                <Route path="/upsolve/codeforces" element={mainUpsolve("virtualData",codeforces,"codeforces")} />
+                <Route
+                  path="/upsolve/codeforces"
+                  element={mainUpsolve('virtualData', codeforces, 'codeforces')}
+                />
                 {/* Codeforces upsolve */}
-                <Route path="/upsolve/atcoder" element={mainUpsolve("PracticeData", atcoder, "atcoder")} />
+                <Route
+                  path="/upsolve/atcoder"
+                  element={mainUpsolve('PracticeData', atcoder, 'atcoder')}
+                />
                 {/* Atcoder Upsolve */}
-                <Route path="/upsolve/codechef" element={mainUpsolve("simpleData", codechef, "codechef")} />
+                <Route
+                  path="/upsolve/codechef"
+                  element={mainUpsolve('simpleData', codechef, 'codechef')}
+                />
                 {/* Codechef upsolve */}
                 <Route path="/" element={<Homepage />} /> {/* Homepage */}
                 <Route path="/profile" element={<Profile />} />

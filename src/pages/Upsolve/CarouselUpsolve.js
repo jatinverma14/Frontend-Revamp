@@ -14,11 +14,11 @@ export default function Carousel_Upsolve(props) {
           <CommonCard name={props.name} />
         </Col>
         <Col span={19}>
-          
           <Carousel
             customTransition="all .5"
             transitionDuration={500}
-            responsive={RESPONSIVE}>
+            responsive={RESPONSIVE}
+          >
             {props.problems.map((prob) => {
               if (prob.status === 'solved') {
                 if (props.notAttemptedToggle == false) {
@@ -38,27 +38,23 @@ export default function Carousel_Upsolve(props) {
                     </Col>
                   )
                 }
-                
               } else if (prob.status === 'wrong') {
-                
-                  return (
-                    <Col span={19}>
-                      {' '}
-                      <div className="wrong">
-                        <CommonQues
-                          sitename={props.sitename}
-                          url={prob.url}
-                          index={prob.index}
-                          name={prob.name}
-                          className="red"
-                          tags={prob.tags}
-                          status="WRONG"
-                        />
-                      </div>
-                    </Col>
-                  )
-                
-
+                return (
+                  <Col span={19}>
+                    {' '}
+                    <div className="wrong">
+                      <CommonQues
+                        sitename={props.sitename}
+                        url={prob.url}
+                        index={prob.index}
+                        name={prob.name}
+                        className="red"
+                        tags={prob.tags}
+                        status="WRONG"
+                      />
+                    </div>
+                  </Col>
+                )
               } else if (prob.status === 'upsolved') {
                 if (props.notAttemptedToggle == false) {
                   return (
