@@ -10,6 +10,9 @@ import {
 import Homepage from './pages/Homepage'
 import Login from './pages/LogReg/Login'
 import Register from './pages/LogReg/Register'
+import CodeforcesUp from './pages/Upsolve/CodeforcesUp'
+import CodechefUp from './pages/Upsolve/CodechefUp'
+import AtcoderUp from './pages/Upsolve/AtcoderUp'
 import Parent from './pages/Ladders-Practice/Parent'
 import Profile from './pages/Profile/Profile'
 import FillInfo from './pages/LogReg/FillInfo'
@@ -31,10 +34,6 @@ import TermsAndConditions from './pages/ExtraInfo/TermsAndConditions'
 import Contests from '../src/pages/Contests/Contests'
 import { Layout, Menu } from 'antd'
 import ContestAPI from './actions/Contest'
-import mainUpsolve from './pages/Upsolve/mainUpsolve'
-import { atcoder, codechef, codeforces } from './actions/upsolve.actions'
-import Navbar from './pages/Navbar'
-
 
 const { Header, Footer, Content } = Layout
 
@@ -117,7 +116,7 @@ const App = () => {
     <>
       <CredentialsContext.Provider value={{ creds, setCreds }}>
         <Layout>
-          {/* <Header>
+          <Header>
             <div className="logo" />
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
               {new Array(7).fill(null).map((_, index) => {
@@ -125,9 +124,7 @@ const App = () => {
                 return <Menu.Item key={key}>{`nav ${key}`}</Menu.Item>
               })}
             </Menu>
-          </Header> */}
-
-          <Navbar/>
+          </Header>
           <Content>
             <Router>
               <Routes>
@@ -138,11 +135,11 @@ const App = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 {/* Login/Registration */}
-                <Route path="/upsolve/codeforces" element={mainUpsolve("virtualData",codeforces,"codeforces")} />
+                <Route path="/upsolve/codeforces" element={<CodeforcesUp />} />
                 {/* Codeforces upsolve */}
-                <Route path="/upsolve/atcoder" element={mainUpsolve("PracticeData", atcoder, "atcoder")} />
+                <Route path="/upsolve/atcoder" element={<AtcoderUp />} />
                 {/* Atcoder Upsolve */}
-                <Route path="/upsolve/codechef" element={mainUpsolve("simpleData", codechef, "codechef")} />
+                <Route path="/upsolve/codechef" element={<CodechefUp />} />
                 {/* Codechef upsolve */}
                 <Route path="/" element={<Homepage />} /> {/* Homepage */}
                 <Route path="/profile" element={<Profile />} />
