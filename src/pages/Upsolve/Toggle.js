@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch } from 'antd'
+import { Switch } from 'antd';
 
 export default function Toggle(props) {
   return (
@@ -18,22 +18,17 @@ export default function Toggle(props) {
         </divd>
 
         <div className="Right-Side">
-          <div
-            className={props.siteName !== 'codechef' ? 'Toggle' : 'noDisplay'}
-          >
+          <div className = {(props.siteName !== "codechef")? "Toggle": "noDisplay"}>
             <h6>Include Practice </h6>
             <div>
-              <Switch
-                defaultUnChecked
-                onChange={(val) => {
-                  props.setPracticeToggle(!props.PracticeToggle)
-                  props.setvirtualPracticeToggle(!props.virtualPracticeToggle)
-                  props.setnextPage(1)
-                }}
-              />
+              <Switch defaultUnChecked onChange = {(val)=>{
+                props.setPracticeToggle(!props.PracticeToggle)
+                props.setvirtualPracticeToggle(!props.virtualPracticeToggle)
+                props.setnextPage(1)
+              }}  />
             </div>
           </div>
-          <div>
+          <div >
             <h6>Only Wrong/Not Attempted</h6>
             <div>
               <Switch

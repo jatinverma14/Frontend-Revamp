@@ -171,100 +171,100 @@ function ContestPage({ queryStr, ContestAPI }) {
     <>{/* <Loading /> */}</>
   ) : (
     <>
-      <div className="main_container">
-        <div id="contest_nav_id">{/* <Navbar /> */}</div>
-        <h3 className={`page_heading ${blurBackground}`} id="page_heading_id">
-          Contests
-        </h3>
-        <Button className="filter_buttonnn" type="primary" onClick={openNav}>
-          Filter
-        </Button>
-        <Button
-          className="refresh_buttonnn"
-          type="primary"
-          onClick={() => window.location.reload()}
-        >
-          Refresh
-        </Button>
+      <div id="contest_nav_id">{/* <Navbar /> */}</div>
+      <h3 className={`page_heading ${blurBackground}`} id="page_heading_id">
+        Contests
+      </h3>
+      <Button className="filter_buttonnn" type="primary" onClick={openNav}>
+        Filter
+      </Button>
+      <Button
+        className="refresh_buttonnn"
+        type="primary"
+        onClick={() => window.location.reload()}
+      >
+        Refresh
+      </Button>
 
-        <div id="mySidenav1" className={`sidenav1 ${openSideNav}`}>
-          {/* modal popup */}
-          <ModalForDivision
-            difflev={DIFFICULTY_OBJECT.difficultyLevels}
-            display={displayDiff}
-            change={changeDifficultyFilter}
+      <div id="mySidenav1" className={`sidenav1 ${openSideNav}`}>
+        {/* modal popup */}
+        <ModalForDivision
+          difflev={DIFFICULTY_OBJECT.difficultyLevels}
+          display={displayDiff}
+          change={changeDifficultyFilter}
+        />
+        <div className="filterHeading">
+          Gym:
+          <Switch
+            className="switchFilter"
+            defaultChecked={gym}
+            onChange={gymChange}
+            checkedChildren={<CheckOutlined />}
+            unCheckedChildren={<CloseOutlined />}
           />
-          <div className="filterHeading">
-            Gym:
-            <Switch
-              className="switchFilter"
-              defaultChecked={gym}
-              onChange={gymChange}
-              checkedChildren={<CheckOutlined />}
-              unCheckedChildren={<CloseOutlined />}
-            />
-          </div>
-          <div className="filterHeading">
-            Solved By Mentor:
-            <Switch
-              className="switchFilter"
-              defaultChecked={mentorr}
-              onChange={mentorrChange}
-              checkedChildren={<CheckOutlined />}
-              unCheckedChildren={<CloseOutlined />}
-            />
-          </div>
-          <br></br> <br></br>
-          <Button className="sidenav_apply_button" onClick={handleSubmit}>
-            Apply
-          </Button>
-          <Button className="sidenav_close_button" onClick={closeNav}>
-            Close
-          </Button>
         </div>
-
-        {!problems.result ? (
-          // <Loading />
-          <h1>hi</h1>
-        ) : (
-          <>
-            <div
-              className={`contests_page ${blurBackground}`}
-              id="contests_page_id"
-            >
-              <div className="roww">
-                <div className="input-group">
-                  {/* search box */}
-                  <Search
-                    placeholder="input search text"
-                    allowClear
-                    enterButton="Search"
-                    size="large"
-                    onChange={(e) => setSearchText(e.target.value)}
-                    onSearch={handleSearch}
-                    className="search_box"
-                  />
-                </div>
-              </div>
-              <Row gutter={[16, 16]}>
-                {problems.result.map((playlist, i) => {
-                  return (
-                    <>
-                      <Col
-                        span={screen.width > 768 ? 12 : 25}
-                        style={{ marginBottom: '1rem' }}
-                      >
-                        <AccordionCom problem={playlist} />
-                      </Col>
-                    </>
-                  )
-                })}
-              </Row>
-            </div>
-            {/* <FooterSmall /> */}
-          </>
-        )}
+        <div className="filterHeading">
+          Solved By Mentor:
+          <Switch
+            className="switchFilter"
+            defaultChecked={mentorr}
+            onChange={mentorrChange}
+            checkedChildren={<CheckOutlined />}
+            unCheckedChildren={<CloseOutlined />}
+          />
+        </div>
+        <br></br> <br></br>
+        <Button className="sidenav_apply_button" onClick={handleSubmit}>
+          {' '}
+          Apply{' '}
+        </Button>
+        <Button className="sidenav_close_button" onClick={closeNav}>
+          {' '}
+          Close{' '}
+        </Button>
       </div>
+
+      {!problems.result ? (
+        // <Loading />
+        <h1>hi</h1>
+      ) : (
+        <>
+          <div
+            className={`contests_page ${blurBackground}`}
+            id="contests_page_id"
+          >
+            <div className="roww">
+              <div className="input-group">
+                {/* search box */}
+                <Search
+                  placeholder="input search text"
+                  allowClear
+                  enterButton="Search"
+                  size="large"
+                  onChange={(e) => setSearchText(e.target.value)}
+                  onSearch={handleSearch}
+                  className="search_box"
+                />
+              </div>
+            </div>
+            <Row gutter={[16, 16]}>
+              {problems.result.map((playlist, i) => {
+                return (
+                  <>
+                    <Col
+                      span={screen.width > 768 ? 12 : 25}
+                      style={{ marginBottom: '1rem' }}
+                    >
+                      <AccordionCom problem={playlist} />
+                    </Col>
+                  </>
+                )
+              })}
+            </Row>
+          </div>
+          {/* <FooterSmall /> */}
+        </>
+      )}
     </>
   )
 }

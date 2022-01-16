@@ -22,7 +22,6 @@ const ModalForDivision = (props) => {
         title={<b>Divisions</b>}
         width={screen.width > 650 ? 550 : 400}
         onCancel={handleCancel}
-        className="modal"
         footer={
           <Button
             className="modal_set_button"
