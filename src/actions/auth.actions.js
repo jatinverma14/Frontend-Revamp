@@ -13,8 +13,8 @@ export async function login(username, password) {
 
 export async function register(emailR, usernameR, passwordR) {
   return fetch(
-    // `https://api.codedigger.tech/auth/register/?redirect_url=${process.env.REACT_APP_SEND_EMAIL_RDURL}`,
-    `https://api.codedigger.tech/auth/register/?redirect_url=https://codedigger.tech/email-verified`,
+    `https://api.codedigger.tech/auth/register/?redirect_url=${process.env.REACT_APP_SEND_EMAIL_RDURL}`,
+    // `https://api.codedigger.tech/auth/register/?redirect_url=https://codedigger.tech/email-verified`,
     {
       method: 'POST',
       headers: {

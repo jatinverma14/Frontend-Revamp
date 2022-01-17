@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { passreqEmail } from '../../actions/auth.actions'
+import { setNewPass as passreqEmail } from '../../actions/auth.actions'
 import useWindowDimensions from '../../components/useWindowDimensions'
 import {
   Row,
@@ -63,7 +63,7 @@ function NewPassword(props) {
       i++
     }
     myuidb = uidb.substring(0, i)
-    setNewPass(pass, token, myuidb)
+    passreqEmail(pass, token, myuidb)
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
