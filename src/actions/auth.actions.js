@@ -66,3 +66,17 @@ export async function setNewPass(password, token, uidb64) {
     }),
   }).then((data) => data.json())
 }
+
+export async function NewPassRequest(oldPass, NewPass, accessToken) {
+  return fetch('https://api.codedigger.tech/auth/password-change/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({
+      old_pass: oldPass,
+      new_pass: NewPass,
+    }),
+  }).then((data) => data.json())
+}
