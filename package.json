@@ -7,6 +7,7 @@
     "immutability-helper": "^3.1.1",
     "query-string": "^7.0.1",
     "react": "^17.0.2",
+    "react-circular-progressbar": "^2.0.4",
     "react-dom": "^17.0.2",
     "react-router": "^6.0.2",
     "react-router-dom": "^6.0.2",
