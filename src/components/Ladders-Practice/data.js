@@ -4,7 +4,7 @@ export const cards = [
     title: 'Div.3-A/ Div.2-A',
     des: 'Rating <= 1000',
     numberOfPeople: '10',
-    questionsDone: 12,
+    questionsDone: 20,
     questionsTotal: 24,
   },
   {

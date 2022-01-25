@@ -10,7 +10,7 @@ const globalStyles = {
   margin: '5vh 20vw',
 }
 
-function Parent(props) {
+function Level(props) {
   const { type, wise } = props
   console.log(type, wise)
   return (
@@ -19,8 +19,8 @@ function Parent(props) {
         <Row>
           <Typography
             img={img}
-            heading={pages[0].heading}
-            subheading={pages[0].subheading}
+            heading={pages[1].heading}
+            subheading={pages[1].subheading}
           />
         </Row>
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
@@ -43,4 +43,4 @@ function Parent(props) {
   )
 }
 
-export default Parent
+export default Level

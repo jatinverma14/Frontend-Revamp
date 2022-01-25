@@ -29,7 +29,7 @@ const subheadingStyles = {
   fontSize: '0.8rem',
 }
 
-export default function ParentCard({
+export default function PlaylistCard({
   title,
   description,
   numberOfPeople,
