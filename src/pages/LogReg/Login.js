@@ -12,6 +12,7 @@ import {
   Button,
   Checkbox,
   Divider,
+  message,
 } from 'antd'
 import {
   EyeInvisibleOutlined,
@@ -58,7 +59,9 @@ function Login(props) {
     login(username, password).then((data) => {
       console.log(data)
       if (data.status === 'FAILED') {
-        alert(data.error)
+        message.error('Failed to login!', 3, () => {
+          alert(data.error)
+        })
       } else {
         console.log(data.tokens)
         localStorage.setItem(
@@ -73,10 +76,14 @@ function Login(props) {
       }
       if (data.first_time_login === true) {
         // successfull first timer login
-        navigate('/updateProfile')
+        message.success('Welcome to CodeDigger!', 1, () => {
+          navigate('/updateProfile')
+        })
       } else {
         // successful login and navigated to homepage
-        navigate('/home')
+        message.success('Welcome to CodeDigger!', 1, () => {
+          navigate('/home')
+        })
       }
     })
   }
