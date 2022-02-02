@@ -1,18 +1,7 @@
 import { useState, useEffect } from 'react'
 import { NewPassRequest } from '../../actions/auth.actions'
 import useWindowDimensions from '../../components/useWindowDimensions'
-import {
-  Row,
-  Col,
-  Typography,
-  Form,
-  Input,
-  Space,
-  Button,
-  Radio,
-  Image,
-  Divider,
-} from 'antd'
+import { Row, Col, Typography, Form, Input, Space, Button, message } from 'antd'
 import image from '../../assets/changePass/changePass.svg'
 import * as styles from '../../assets/changePass/overrideStyles'
 
@@ -95,8 +84,11 @@ function ChangePassword(props) {
         console.log(data)
         if (data.status === 'OK') {
           console.log(data.result)
-          window.location = '/login'
+          message.success('Passwords changed', 1, () => {
+            window.location = '/login'
+          })
         } else {
+          message.error("Password doesn't match", 1)
           alert(JSON.stringify(data))
         }
       })
