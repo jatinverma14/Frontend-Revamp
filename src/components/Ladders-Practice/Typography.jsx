@@ -2,7 +2,7 @@ import React from 'react'
 
 const basePositionStyles = {
   display: 'flex',
-  margin: '1rem 5rem',
+  margin: '1rem',
 }
 
 export const baseTypographyStyles = {

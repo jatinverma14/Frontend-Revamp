@@ -7,7 +7,7 @@ import img from '../../assets/topicwise/trello.png'
 
 const globalStyles = {
   color: '#fff',
-  margin: '5vh 20vw',
+  margin: '3vh 20vw',
 }
 
 function Parent(props) {
@@ -23,7 +23,7 @@ function Parent(props) {
             subheading={pages[0].subheading}
           />
         </Row>
-        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+        <Row gutter={[{ xs: 8, sm: 16, md: 24, lg: 32 }, 30]}>
           {data.map((item, index) => {
             return (
               <Col xs={24} md={12} lg={8} key={index}>

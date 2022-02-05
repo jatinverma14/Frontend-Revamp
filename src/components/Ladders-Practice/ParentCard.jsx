@@ -7,11 +7,12 @@ import pause from '../../assets/topicwise/pause.png'
 import people from '../../assets/topicwise/people.png'
 
 const cardStyles = {
-  height: '29vh',
-  width: '15vw',
+  // height: '29vh',
+  // width: '15vw',
   minWidth: '240px',
+  minHeight: '260px',
   padding: '1.5rem 1.5rem 0 1.5rem',
-  margin: '2rem 5rem',
+  // margin: '2rem 5rem',
   boxShadow:
     '0px 0px 1px rgba(0, 0, 0, 0.2), 0px 20px 128px rgba(0, 0, 0, 0.3), 0px 0px 50px rgba(0, 0, 0, 0.1)',
   backgroundColor: '#191C1F',
