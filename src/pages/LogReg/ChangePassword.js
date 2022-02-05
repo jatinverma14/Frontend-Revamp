@@ -31,7 +31,7 @@ function ChangePassword(props) {
     overrideStyles,
   } = styles
 
-  // Submit form
+  // This handle function could be used for NewPassword file as it uses the logic for that endpoint
   // function handleSubmit(e) {
   //   e.preventDefault()
   //   if (newpass.length === 0 || confirmpass === 0) {

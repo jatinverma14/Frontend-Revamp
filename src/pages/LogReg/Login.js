@@ -73,17 +73,16 @@ function Login(props) {
             username,
           })
         )
-      }
-      if (data.first_time_login === true) {
-        // successfull first timer login
-        message.success('Welcome to CodeDigger!', 1, () => {
-          navigate('/updateProfile')
-        })
-      } else {
-        // successful login and navigated to homepage
-        message.success('Welcome to CodeDigger!', 1, () => {
-          navigate('/home')
-        })
+
+        if (data.first_time_login === true) {
+          message.success('Welcome to CodeDigger!', 1, () => {
+            navigate('/updateProfile')
+          })
+        } else {
+          message.success('Login Successful!', 1, () => {
+            navigate('/home')
+          })
+        }
       }
     })
   }
