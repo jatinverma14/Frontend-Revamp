@@ -40,8 +40,8 @@ function Login(props) {
     }
   }, [width])
 
-  console.log(localStorage.getItem('err'))
-  console.log(props)
+  // console.log(localStorage.getItem('err'))
+  // console.log(props)
   const {
     typeStyles,
     buttonStyles,
@@ -91,7 +91,7 @@ function Login(props) {
     <>
       <style>{overrideStyles}</style>
       <div>
-        <Row style={{ ...typeStyles, minHeight: '100vh' }}>
+        <Row style={{ ...typeStyles, minHeight: '90vh' }}>
           {svg && (
             <Col
               span={12}
@@ -103,7 +103,7 @@ function Login(props) {
             >
               <img
                 src={image}
-                style={{ transform: 'translateX(15%)' }}
+                style={{ transform: 'translateX(15%) scale(0.9)' }}
                 alt="Login"
               />
             </Col>

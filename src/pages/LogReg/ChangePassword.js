@@ -98,7 +98,7 @@ function ChangePassword(props) {
     <>
       <style>{overrideStyles}</style>
       <div>
-        <Row style={{ ...typeStyles, minHeight: '100vh' }}>
+        <Row style={{ ...typeStyles, minHeight: '90vh' }}>
           <Col
             span={svg ? 12 : 24}
             type="flex"
@@ -240,7 +240,7 @@ function ChangePassword(props) {
             >
               <img
                 src={image}
-                // style={{ transform:"translateX(15%)" }}
+                style={{ transform: 'scale(0.8)' }}
                 alt="Login"
               />
             </Col>

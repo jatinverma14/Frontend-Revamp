@@ -54,7 +54,7 @@ function Register(props) {
     <>
       <style>{overrideStyles}</style>
       <div>
-        <Row style={{ ...typeStyles, minHeight: '100vh' }}>
+        <Row style={{ ...typeStyles, minHeight: '90vh' }}>
           {svg && (
             <Col
               span={12}
@@ -66,7 +66,7 @@ function Register(props) {
             >
               <img
                 src={image}
-                style={{ transform: 'translateX(15%)' }}
+                style={{ transform: 'translateX(15%) scale(0.9)' }}
                 alt="Login"
               />
             </Col>

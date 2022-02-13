@@ -13,7 +13,7 @@ function UpdateProfile(props) {
   const [spoj, setSpoj] = useState('')
   const [uva, setUva] = useState('')
   const { Text, Link } = Typography
-  console.log(props)
+  // console.log(props)
 
   const {
     typeStyles,
@@ -35,12 +35,12 @@ function UpdateProfile(props) {
     <>
       <style>{overrideStyles}</style>
       <div>
-        <Row style={{ ...typeStyles, minHeight: '100vh' }}>
+        <Row style={{ ...typeStyles, minHeight: '90vh' }}>
           <Col
             span={12}
             type="flex"
             height="100vh"
-            minWidth="32vw"
+            minwidth="32vw"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -252,11 +252,7 @@ function UpdateProfile(props) {
               justifyContent: 'center',
             }}
           >
-            <img
-              src={image}
-              // style={{ transform:"translateX(-15%)" }}
-              alt="Login"
-            />
+            <img src={image} style={{ transform: 'scale(0.8)' }} alt="Login" />
           </Col>
         </Row>
       </div>
